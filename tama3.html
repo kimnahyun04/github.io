@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>TAMA VILLAGE - 이미지 상세</title>
+  <style>
+    @font-face {
+      font-family: 'DungGeunMo';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/DungGeunMo.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'DungGeunMo', sans-serif;
+      background-color:#d900ffcc;
+      background-image: url(https://tamagotchi-official.com/jp/series/uni/images/howtoplay/be-unique/img_be-unique_02.gif);
+      background-position: center top 48%;
+      background-size: 1400px; /* 좀 더 확대 */
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      image-rendering: pixelated; /* 픽셀 스타일 유지 */
+      filter: contrast(1.1); /* 배경 강조 */
+    }
+
+    header {
+      background: #d900ffcc;/* 반투명 */
+      text-shadow: 3px 3px 0 #0015ff, -3px -3px 0 #0015ff;
+      color: #ffcc00;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      font-size: 30px;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 40px;
+      gap: 80px; 
+    }
+
+    .tamagotchi-wrapper {
+      position: relative;
+      width: 1150px;  
+      margin-top: -180px;
+      margin-left: -30px;
+      flex-shrink: 0;  
+    }
+
+    .tamagotchi-device {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: drop-shadow(2px 2px 0 #ffffff) 
+              drop-shadow(-2px 2px 0 #ffffff)
+              drop-shadow(2px -2px 0 #ffffff)
+              drop-shadow(-2px -2px 0 #ffffff)
+              drop-shadow(15px 15px 18px rgba(0, 0, 0, 0.4));
+    }
+
+    .pixel-character {
+      position: absolute;
+      top: 65%;  
+      left: 50.5%;
+      transform: translate(-50%, -50%);
+      width: 120px; 
+      pointer-events: none;
+    }
+
+    .device.right {
+      width: 600px;
+      height: 450px;
+      background-color:#d900ffcc;/* 반투명 회색 */
+      border: 4px solid #000;
+      box-shadow: 6px 6px 0 #444;
+      font-size: 14px;
+      overflow: hidden;
+      flex-shrink: 0;
+      transform: translateX(-45.1%);
+      backdrop-filter: blur(2px); /* 배경 흐리게 효과 */
+    }
+
+    .device-header {
+      background-color: #0095ffcc; /* 반투명 파랑 */
+      color: white;
+      padding: 4px 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .device-header .title {
+      font-weight: bold;
+    }
+
+    .device-header .close-button {
+      background: rgb(255, 74, 38);
+      color: white;
+      border: 2px solid rgb(255, 60, 21);
+      width: 20px;
+      height: 20px;
+      text-align: center;
+      line-height: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .device-menu {
+      background-color: #e0e0e0cc; /* 약간 투명 */
+      padding: 4px 8px;
+      border-bottom: 1px solid #000;
+    }
+
+    .device-screen {
+      background-color: #d900ffcc; /* 반투명 형광색 */
+      background-image: url(https://tamagotchi-official.com/us/series/uni/images/howtoplay/and-more/img_life_01.gif);
+      image-rendering: pixelated;
+      background-size: 570px;
+      background-position: center top -200px;
+      background-repeat: no-repeat;
+      width: 100%;
+      height: calc(100% - 65px);
+      border-top: 1px solid #000;
+      padding: 16px;
+    }
+
+    .label {
+      font-weight: bold;
+    }
+    button {
+    font-family: 'DungGeunMo', sans-serif;
+    font-size: 16px;
+    background-color: #ffd800;
+    border: 2px solid #000;
+    padding: 6px 14px;
+    cursor: pointer;
+    margin: 10px;
+    box-shadow: 2px 2px 0 #000;
+    }
+    button:hover {
+    background-color: #fff176;
+    }
+    .text-box {
+  background-color:  #f09dffdf;
+  color: #000;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+    }
+     .back-arrow, .home-icon {
+     width: 50px;
+     height: 50px;
+     background-size: cover;
+     background-position: center;
+     transition: background-image 0.3s ease;
+     display: inline-block;
+     z-index: 10;
+     }
+
+    .back-arrow {
+    background-image: url(./1x/뒤로가기.png);
+    }
+    .back-arrow:hover {
+    background-image: url(./1x/뒤로가기2.png);
+    }
+ 
+    .home-icon {
+    background-image: url(./1x/뒤로가기.png);
+    }
+
+    .home-icon:hover {
+    background-image: url(./1x/뒤로가기2.png);
+    }
+    .logo-text {
+   font-family: 'Press Start 2P', cursive;
+   font-size: 24px;
+   text-decoration: none;
+   text-shadow: 5px 5px 0 #0015ff, -5px -5px 0 #0015ff;
+   color: #ffcc00;
+   margin: 0 auto;
+   position: absolute;
+   top: 28px;
+   left: 50%;
+   transform: translateX(-50%);
+   display: inline-block;
+   z-index: 10;
+   }
+  </style>
+   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <a href="tamagotchi.html" class="back-arrow"></a>
+    <div><a href="tamagotchi.html" class="logo-text">TAMA VILLAGE </a></div>
+    <a href="tamagotchi.html" class="home-icon"></a>
+  </header>
+
+  <div class="container">
+    <div class="tamagotchi-wrapper">
+      <img src="damat3.png" alt="다마고치 기계" class="tamagotchi-device">
+      <img src="https://i.namu.wiki/i/hZVLSz2rFDGF2iz4kxBRijmthf9hNebwuQl8YCdCHkmtnyQNxTHQLkJid7kU52soPu5qmQ5nBAzPU99z5gUCCQ.webp" alt="픽셀 캐릭터" class="pixel-character">
+    </div>
+
+    <div class="device right">
+      <div class="device-header">
+        <span class="title">CHARACTER INFO</span>
+        <div class="close-button">X</div>
+      </div>
+      <button onclick="saveCharacter()">담아가기</button>
+
+       <script>
+       function saveCharacter() {
+       const characterImg = "https://i.namu.wiki/i/hZVLSz2rFDGF2iz4kxBRijmthf9hNebwuQl8YCdCHkmtnyQNxTHQLkJid7kU52soPu5qmQ5nBAzPU99z5gUCCQ.webp";
+       let characters = JSON.parse(localStorage.getItem('savedCharacters') || '[]');
+       characters.push(characterImg);
+       localStorage.setItem('savedCharacters', JSON.stringify(characters));
+       localStorage.setItem('fromSaveButton', 'true');
+       window.location.href = 'intro.html';
+       }
+      </script>
+      <div class="device-menu">설명 보기</div>
+      <div class="device-screen">
+        <div class="text-box">
+        <h2>러블리치</h2>
+        <p><span class="label">성격:</span> 상냥하고 여성스러운 &nbsp;&nbsp; <span class="label">성별:</span> 여자</p>
+        <p><span class="label">말버릇:</span> “정해진 말버릇은 없다”</p>
+        <p>
+          러블리치는 애니메이션 다마고치의 주요 여성 캐릭터 중 한 명이다. 그녀는 <신나는! 다 함께 두근두근 경주> 편에서 러블린으로 처음 눈에 띄었다<br>
+          그녀는 러블리치의 가족인 러브파파리치, 러브마마리치와 함께 다마카페에서 살고 있으며,<br>
+          그곳은 그녀의 어머니와 아버지가 운영하는 카페 레스토랑 역할도 한다. 러블리치는 러블린이라는 예명으로 비밀스러운 이중생활을 한다.
+          러블린으로서, 그녀는 다마고치 타운에서 가장 인기 있는 아이돌이다. 그녀는 호스트, 가수, 기자 그리고 종종 텔레비전 쇼의 주인공으로서 많은 활동에 출연한다.
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
