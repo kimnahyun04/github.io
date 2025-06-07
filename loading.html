@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loading...</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: rgb(255, 255, 255);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    img {
+      width: 300px;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <img src="https://tamagotchi-official.com/jp/series/uni/images/howtoplay/be-unique/img_handmade_03.gif" alt="로딩중...">
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const target = params.get("target");
+    setTimeout(() => {
+      if (target) {
+        window.location.href = target;
+      }
+    }, 2000); // 3초 후 이동
+  </script>
+</body>
+</html>
+
