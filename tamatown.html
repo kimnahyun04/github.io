@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tama Village</title>
+  <style>
+    @font-face {
+      font-family: 'DungGeunMo';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/DungGeunMo.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+    body {
+      margin: 0;
+      font-family: 'DungGeunMo', sans-serif;
+      background: #a3e3ff;
+      overflow-x: hidden;
+      
+      
+    }
+    header {
+      background: #0eacfb;
+      text-shadow: 3px 3px 0 #0015ff, -3px -3px 0 #0015ff;
+      color: #ffcc00;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      font-size: 30px;
+    }
+ 
+
+    .nav-icons {
+      display: flex;
+      gap: 10px;
+    }
+    .back-arrow, .home-icon {
+     width: 50px;
+     height: 50px;
+     background-size: cover;
+     background-position: center;
+     transition: background-image 0.3s ease;
+     }
+
+
+    .back-arrow {
+    background-image: url(뒤로가기.png);
+    }
+    .back-arrow:hover {
+    background-image: url(뒤로가기2.png);
+    }
+ 
+    .home-icon {
+    background-image: url(뒤로가기.png);
+    }
+
+    .home-icon:hover {
+    background-image: url(뒤로가기2.png);
+    }
+
+    .banner {
+      background-color: #64ccff;
+      background-image: url(배경7.png);
+      background-size: 950px;
+      image-rendering: pixelated;
+      text-align: center;
+      padding: 200px 0;
+    }
+    .banner h1 {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 50px;
+      
+    }
+    .banner h1 span {
+  display: inline-block;
+  animation: popBounce 1.4s infinite;
+  animation-delay: calc(0.05s * var(--i));
+  color: #ffffff;
+  text-shadow: 1px 1px 0 #00cc00,
+            2px 2px 0 #009900,
+            3px 3px 0 #006600;
+  
+}
+
+@keyframes popBounce {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  30% {
+    transform: translateY(-4px) scale(1.1);
+    text-shadow: 0 0 5px #ccffcc, 0 0 10px #88ff88;
+  }
+  60% {
+    transform: translateY(1px) scale(0.98);
+  }
+}
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+    .characters {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      background: #00AEEF;
+      padding: 40px;
+      border-top: 15px double #a5e1ff;
+      border-bottom: 15px double #a5e1ff;
+      box-shadow: inset 0 0 20px rgba(255, 182, 193, 0.6);
+      position: relative;
+      z-index: 1;
+      justify-content: center;
+      
+    }
+    .character {
+      position: relative;
+      background: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+      border-radius: 8px;
+      height: 150px;
+      width: 150px;
+      margin: 0 auto;
+      box-shadow: 4px 4px 0 #000000;
+      border: 2px solid #000000;
+      overflow: hidden;
+    }
+    .character:hover .overlay {
+    opacity: 1;
+    }
+
+   .overlay {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0, 170, 255, 0.399);
+   color: #fff;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-size: 18px;
+   font-weight: bold;
+   opacity: 0;
+   transition: opacity 0.3s ease;
+   border-radius: 8px;
+   text-shadow: 1px 1px 2px #000;
+   font-family: 'DungGeunMo', sans-serif;
+   }
+
+    .character img {
+      image-rendering: pixelated;
+      width: 800px;
+      height: 500px;
+      object-fit: contain;
+       
+    }
+    
+    .char1 img {margin-top:-20px; margin-left: 20px;}
+    .char2 img {margin-top: -20px; margin-right:10px;}
+    .char3 img {margin-top: -10px;}
+    .char4 img {margin-top: -20px;}
+    .char5 img {margin-top: -20px;}
+    .char6 img {margin-top: -20px; margin-right: 10px;}
+    .char7 img {margin-top: -20px;}
+    .char8 img {margin-top: -40px;}
+    .char9 img {margin-top: -40px;}
+    .char10 img {margin-top: -30px;}
+    .back-arrow, .home-icon {
+     width: 50px;
+     height: 50px;
+     background-size: cover;
+     background-position: center;
+     transition: background-image 0.3s ease;
+     display: inline-block;
+     z-index: 10;
+     }
+
+    .back-arrow {
+    background-image: url(뒤로가기.png);
+    }
+    .back-arrow:hover {
+    background-image: url(뒤로가기2.png);
+    }
+ 
+    .home-icon {
+    background-image: url(뒤로가기.png);
+    }
+
+    .home-icon:hover {
+    background-image: url(뒤로가기2.png);
+    }
+    .logo-text {
+
+   font-family: 'Press Start 2P', cursive;
+   font-size: 24px;
+   text-decoration: none;
+   text-shadow: 5px 5px 0 #0015ff, -5px -5px 0 #0015ff;
+   color: #ffcc00;
+   margin: 0 auto;
+   position: absolute;
+   top: 28px;
+   left: 50%;
+   transform: translateX(-50%);
+   display: inline-block;
+   z-index: 10;
+   }
+   .character-border {
+  display: inline-block;
+  padding: 10px;
+  border: 4px dashed #a5e1ff;
+  border-radius: 12px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+   
+  
+   
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <a href="tamagotchi.html" class="back-arrow"></a>
+    <div><a href="tamagotchi.html" class="logo-text">TAMA VILLAGE </a></div>
+    <a href="tamagotchi.html" class="home-icon"></a>
+  </header>
+  <div class="banner">
+    <h1><span>O</span><span>R</span><span>I</span><span>G</span><span>I</span><span>N</span><span>A</span><span>L</span>
+  
+  <span>T</span><span>A</span><span>M</span><span>A</span><span>G</span><span>O</span><span>T</span><span>C</span><span>H</span><span>I</span>
+  
+  <span>F</span><span>R</span><span>I</span><span>E</span><span>N</span><span>D</span><span>S</span></h1>
+  </div>
+  <div class="characters">
+    <div class="character-border"><div class="character char1"><img src="픽셀다마고치-1.png" alt="Character 1"><div class="overlay"><a href="./pixeltama1.html" class="overlay"></a></div></div></div>
+    <div class="character-border"><div class="character char2"><img src="픽셀다마고치2.png" alt="Character 2"><div class="overlay"><a href="./pixeltama2.html" class="overlay"></a></div></div></div>
+    <div class="character-border"><div class="character char3"><img src="픽셀다마고치3.png" alt="Character 3"><div class="overlay"><a href="./pixeltama3.html" class="overlay"></a></div></div></div>
+    <div class="character-border"><div class="character char4"><img src="픽셀다마고치4.png" alt="Character 4"><div class="overlay"><a href="./pixeltama4.html" class="overlay"></a></div></div></div>
+    <div class="character-border"><div class="character char5"><img src="픽셀다마고치5.png" alt="Character 5"><div class="overlay"><a href="./pixeltama5.html" class="overlay"></a></div></div></div>
+    <div class="character-border"><div class="character char6"><img src="픽셀다마고치6.png" alt="Character 6"><div class="overlay"><a href="./pixeltama6.html" class="overlay"></a></div></div></div>
+    <div class="character-border"><div class="character char7"><img src="픽셀다마고치7.png" alt="Character 7"><div class="overlay"><a href="./pixeltama7.html" class="overlay"></a></div></div></div>
+    <div class="character-border"><div class="character char8"><img src="픽셀-다마고치8.png" alt="Character 8"><div class="overlay"><a href="./pixeltama8.html" class="overlay"></a></div></div></div>
+    <div class="character-border"><div class="character char9"><img src="픽셀다마고치9.png" alt="Character 9"><div class="overlay"><a href="./pixeltama9.html" class="overlay"></a></div></div></div>
+    <div class="character-border"><div class="character char10"><img src="픽셀다마고치10.png" alt="Character 10"><div class="overlay"><a href="./pixeltama10.html" class="overlay"></a></div></div></div>
+  </div>
+</body>
+</html>
