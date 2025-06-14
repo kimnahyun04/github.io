@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>TAMA VILLAGE - 이미지 상세</title>
+  <style>
+    @font-face {
+      font-family: 'DungGeunMo';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/DungGeunMo.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'DungGeunMo', sans-serif;
+      background-color:#ff009dcc;
+      background-image: url(https://tamagotchi-official.com/us/series/uni/images/howtoplay/be-unique/img_be-unique_08.gif);
+      background-position: center top 30%;
+      background-size: 1400px; /* 좀 더 확대 */
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      image-rendering: pixelated; /* 픽셀 스타일 유지 */
+      filter: contrast(1.1); /* 배경 강조 */
+    }
+
+    header {
+      background: #ff009dcc;
+      text-shadow: 3px 3px 0 #0015ff, -3px -3px 0 #0015ff;
+      color: #ffcc00;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      font-size: 30px;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 40px;
+      gap: 80px; 
+    }
+
+    .tamagotchi-wrapper {
+      position: relative;
+      width: 950px;  
+      margin-top: -60px;
+      margin-left: 80px;
+      flex-shrink: 0; 
+    }
+
+    .tamagotchi-device {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: drop-shadow(2px 2px 0 #ffffff) 
+              drop-shadow(-2px 2px 0 #ffffff)
+              drop-shadow(2px -2px 0 #ffffff)
+              drop-shadow(-2px -2px 0 #ffffff)
+              drop-shadow(15px 15px 18px rgba(0, 0, 0, 0.4));
+    }
+
+    .pixel-character {
+      position: absolute;
+      top: 57%;  
+      left: 43%;
+      transform: translate(-50%, -50%);
+      width: 120px; 
+      pointer-events: none;
+      filter: drop-shadow(2px 2px 0 #ffffff) 
+              drop-shadow(-2px 2px 0 #ffffff)
+              drop-shadow(2px -2px 0 #ffffff)
+              drop-shadow(-2px -2px 0 #ffffff)
+              drop-shadow(15px 15px 18px rgba(0, 0, 0, 0.4));
+    }
+
+    .device.right {
+      width: 600px;
+      height: 450px;
+      background-color: rgba(192, 192, 192, 0.9); /* 반투명 회색 */
+      border: 4px solid #000;
+      box-shadow: 6px 6px 0 #444;
+      font-size: 14px;
+      overflow: hidden;
+      flex-shrink: 0;
+      transform: translateX(-37.5%);
+      backdrop-filter: blur(2px); /* 배경 흐리게 효과 */
+    }
+
+    .device-header {
+      background-color: #0095ffcc; /* 반투명 파랑 */
+      color: white;
+      padding: 4px 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .device-header .title {
+      font-weight: bold;
+    }
+
+    .device-header .close-button {
+      background: rgb(255, 74, 38);
+      color: white;
+      border: 2px solid rgb(255, 60, 21);
+      width: 20px;
+      height: 20px;
+      text-align: center;
+      line-height: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .device-menu {
+      background-color: #e0e0e0cc; /* 약간 투명 */
+      padding: 4px 8px;
+      border-bottom: 1px solid #000;
+    }
+
+    .device-screen {
+      background-color: rgba(0, 255, 8, 0.85); /* 반투명 형광색 */
+      width: 100%;
+      height: calc(100% - 65px);
+      border-top: 1px solid #000;
+      padding: 16px;
+    }
+
+    .label {
+      font-weight: bold;
+    }
+    button {
+    font-family: 'DungGeunMo', sans-serif;
+    font-size: 16px;
+    background-color: #ffd800;
+    border: 2px solid #000;
+    padding: 6px 14px;
+    cursor: pointer;
+    margin: 10px;
+    box-shadow: 2px 2px 0 #000;
+    }
+    button:hover {
+    background-color: #fff176;
+    }
+    .back-arrow, .home-icon {
+     width: 50px;
+     height: 50px;
+     background-size: cover;
+     background-position: center;
+     transition: background-image 0.3s ease;
+     display: inline-block;
+     z-index: 10;
+     }
+
+    .back-arrow {
+    background-image: url(뒤로가기.png);
+    }
+    .back-arrow:hover {
+    background-image: url(뒤로가기2.png);
+    }
+ 
+    .home-icon {
+    background-image: url(뒤로가기.png);
+    }
+
+    .home-icon:hover {
+    background-image: url(뒤로가기2.png);
+    }
+    .logo-text {
+   font-family: 'Press Start 2P', cursive;
+   font-size: 24px;
+   text-decoration: none;
+   text-shadow: 5px 5px 0 #0015ff, -5px -5px 0 #0015ff;
+   color: #ffcc00;
+   margin: 0 auto;
+   position: absolute;
+   top: 28px;
+   left: 50%;
+   transform: translateX(-50%);
+   display: inline-block;
+   z-index: 10;
+   }
+    
+  </style>
+</head>
+<body>
+  <header>
+    <a href="tamatown2.html" class="back-arrow"></a>
+    <div><a href="tamagotchi.html" class="logo-text">TAMA VILLAGE </a></div>
+    <a href="tamagotchi.html" class="home-icon"></a>
+  </header>
+
+  <div class="container">
+    <div class="tamagotchi-wrapper">
+     <img src="1x/타운기계2.png" alt="다마고치 기계" class="tamagotchi-device">
+      <img src="https://i.namu.wiki/i/qve65FwTKD7P_lHXRjM9IHALGBs8UHBVWj7AqXl9l1b0ySQh4TreEJTAJ-Lq7d5a1uvbPeoy_sQ7XfDQDLn7xA.webp" alt="픽셀 캐릭터" class="pixel-character">
+    </div>
+  
+    <div class="device right">
+      <div class="device-header">
+        <span class="title">CHARACTER INFO</span>
+        <div class="close-button">X</div>
+      </div>
+      <button onclick="saveCharacter()">담아가기</button>
+
+       <script>
+       function saveCharacter() {
+       const characterImg = "https://i.namu.wiki/i/qve65FwTKD7P_lHXRjM9IHALGBs8UHBVWj7AqXl9l1b0ySQh4TreEJTAJ-Lq7d5a1uvbPeoy_sQ7XfDQDLn7xA.webp";
+       let characters = JSON.parse(localStorage.getItem('savedCharacters') || '[]');
+       characters.push(characterImg);
+       localStorage.setItem('savedCharacters', JSON.stringify(characters));
+       localStorage.setItem('fromSaveButton', 'true');
+       window.location.href = 'intro.html';
+       }
+      </script>
+      <div class="device-menu">설명 보기</div>
+      <div class="device-screen">
+        <div class="text-box">
+        <h2>난데치</h2>
+        <p><span class="label">성격:</span> 호기심이 많은 &nbsp;&nbsp; <span class="label">성별:</span> 남자</p>
+        <p><span class="label">말버릇:</span> “~들어봤어?”</p>
+        <p>
+          난데치는 드림 스쿨에 다니고 마메마메치, 플라워치, 구치파치와 함께 로봇 수업을 듣는다. 그는 그의 반 친구인 라이트치를 존경한다.<br>
+          그는 마메마메치에게 라이트치가 비록 그는 학생이지만 지구상에서 가장 위대한 선생님이라고 말했다. 그는 그를 "라이트치씨"라고 부른다.
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
