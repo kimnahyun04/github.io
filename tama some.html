@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tama Village</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'DungGeunMo', sans-serif;
+      background: #a3e3ff;
+    }
+    header {
+      background: #00b3ff;
+      text-shadow: 3px 3px 0 #0015ff, -3px -3px 0 #0015ff;
+      color: #ffcc00;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      font-size: 30px;
+    }
+    .nav-icons {
+      display: flex;
+      gap: 10px;
+    }
+    .back-arrow, .home-icon {
+     width: 50px;
+     height: 50px;
+     background-size: cover;
+     background-position: center;
+     transition: background-image 0.3s ease;
+     }
+
+
+    .back-arrow {
+    background-image: url(뒤로가기.png);
+    }
+    .back-arrow:hover {
+    background-image: url('뒤로가기2.png');
+    }
+ 
+    .home-icon {
+    background-image: url(뒤로가기.png);
+    }
+
+    .home-icon:hover {
+    background-image: url('뒤로가기2.png');
+    }
+    .banner {
+      background-color: #64ccff;
+       background-image: url(배경6.png);
+      background-size: 950px;
+      background-position: center;
+      text-align: center;
+      padding: 200px 0;
+    }
+    .banner h1 {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 50px;
+      
+    }
+    .banner h1 span {
+  display: inline-block;
+  animation: popBounce 1.4s infinite;
+  animation-delay: calc(0.05s * var(--i));
+  color: #ffffff;
+  text-shadow: 1px 1px 0 #0099ff,
+            2px 2px 0 #0099ff,
+            3px 3px 0 #0099ff;
+  
+}
+
+@keyframes popBounce {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  30% {
+    transform: translateY(-4px) scale(1.1);
+    text-shadow: 0 0 5px #53baff, 0 0 10px #2daafe,
+  }
+  60% {
+    transform: translateY(1px) scale(0.98);
+  }
+}
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+    .characters {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      background: #00AEEF;
+      padding: 40px;
+      border-top: 15px double #a5e1ff;
+      border-bottom: 15px double #a5e1ff;
+      box-shadow: inset 0 0 20px rgba(255, 182, 193, 0.6);
+      position: relative;
+      z-index: 1;
+      justify-content: center;
+    }
+    .character {
+      position: relative;
+      background: #d2ffd2;
+      background-image: url(https://i.pinimg.com/736x/d4/54/8e/d4548e01fce2f0ccb100c0778e299e75.jpg);
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+      border-radius: 8px;
+      height: 160px;
+      width: 190px;
+      margin: 0 auto;
+      box-shadow: 4px 4px 0 #0074cc; 
+      border: 2px solid #0074cc;  
+      overflow: hidden;
+    }
+    .character:hover .overlay {
+    opacity: 1;
+    }
+
+   .overlay {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0, 255, 47, 0.542);
+   color: #fff;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-size: 18px;
+   font-weight: bold;
+   opacity: 0;
+   transition: opacity 0.3s ease;
+   border-radius: 8px;
+   text-shadow: 1px 1px 2px #000;
+   font-family: 'DungGeunMo', sans-serif;
+   }
+    .character img {
+      image-rendering: auto;
+      width: 150px;
+      height: 150px;
+      filter: drop-shadow(2px 2px 0 #ffffff) 
+              drop-shadow(-2px 2px 0 #ffffff)
+              drop-shadow(2px -2px 0 #ffffff)
+              drop-shadow(-2px -2px 0 #ffffff)
+              drop-shadow(15px 15px 18px rgba(0, 0, 0, 0.4));
+    }
+    .logo-text {
+
+   font-family: 'Press Start 2P', cursive;
+   font-size: 24px;
+   text-decoration: none;
+   text-shadow: 5px 5px 0 #0059ff, -5px -5px 0 #0059ff; 
+   color: #ffffff;
+   margin: 0 auto;
+   position: absolute;
+   top: 28px;
+   left: 50%;
+   transform: translateX(-50%);
+   display: inline-block;
+   z-index: 10;
+   }
+   .character-border {
+  display: inline-block;
+  padding: 10px;
+  border: 4px dashed #a5e1ff;
+  border-radius: 12px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <a href="characters.html" class="back-arrow"></a>
+    <div><a href="tamagotchi.html" class="logo-text">TAMA VILLAGE </a></div>
+    <a href="tamagotchi.html" class="home-icon"></a>
+  </header>
+  <div class="banner">
+    <h1><span>T</span><span>A</span><span>M</span><span>A</span><span>S</span><span>O</span><span>M</span><span>E</span></h1>
+  </div>
+  <div class="characters">
+    <div class="character-border"><div class="character"><img src="https://tamagotchi-official.com/tamagotchi/jp/character/2024/12/12/Lw7YIgyWPXDfaKxl/19_%E3%83%9E%E3%83%A1%E3%82%A8%E3%83%AB.png" alt="Character 1"><div class="overlay"><a href="./damas1.html" class="overlay"></a></div></div></div>
+    <div class="character-border"><div class="character"><img src="https://tamagotchi-official.com/tamagotchi/jp/character/2024/12/12/MNFan9b6rrizGUsp/20_%E3%81%BA%E3%81%8C%E3%81%95%E3%81%99%E3%81%B1%E3%81%A3%E3%81%A1.png" alt="Character 2"><div class="overlay"><a href="./damas2.html" class="overlay"></a></div></div></div>
+    <div class="character-border"><div class="character"><img src="https://tamagotchi-official.com/tamagotchi/jp/character/2024/12/12/kpidD6D9VGCZSAYJ/21_%E3%83%95%E3%83%A9%E3%83%AF%E3%83%87%E3%82%A3%E3%83%BC%E3%83%86.png" alt="Character 3"><div class="overlay"><a href="./damas3.html" class="overlay"></a></div></div></div>
+    <div class="character-border"><div class="character"><img src="https://tamagotchi-official.com/tamagotchi/jp/character/2024/12/12/bC3ajoKDaT2Iunud/22_%E3%81%9B%E3%81%B3%E3%82%8C%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%94%E3%83%83%E3%83%89.png" alt="Character 4"><div class="overlay"><a href="./damas4.html" class="overlay"></a></div></div></div>
+    <div class="character-border"><div class="character"><img src="https://tamagotchi-official.com/tamagotchi/jp/character/2024/12/12/pm9s3YaLKLN1VmAS/23_%E3%82%86%E3%81%AB%E3%81%BE%E3%82%8B%E3%81%93%E3%83%BC%E3%82%93.png" alt="Character 5"><div class="overlay"><a href="./damas5.html" class="overlay"></a></div></div></div>
+    <div class="character-border"><div class="character"><img src="https://tamagotchi-official.com/tamagotchi/jp/character/2024/12/12/uL0HRlvQZ9He6laH/24_%E3%83%A6%E3%83%A1%E3%83%9F%E3%83%83%E3%83%86%E3%82%A3%E3%82%A8.png" alt="Character 6"><div class="overlay"><a href="./damas6.html" class="overlay"></a></div></div></div>
+    <div class="character-border"><div class="character"><img src="https://tamagotchi-official.com/tamagotchi/jp/character/2024/12/12/ndcj51QaK8AapV1j/25_%E3%83%9E%E3%83%A1%E3%82%B4%E3%83%B3.png" alt="Character 7"><div class="overlay"><a href="./damas7.html"class="overlay"></a></div></div></div>
+    <div class="character-border"><div class="character"><img src="https://tamagotchi-official.com/tamagotchi/jp/character/2024/12/12/G0dXfNhorktdiIkG/27_%E3%81%8A%E3%81%AB%E3%81%BE%E3%82%8B%E3%81%A3%E3%81%A1.png" alt="Character 8"><div class="overlay"><a href="./damas8.html" class="overlay"></a></div></div></div>
+    <div class="character-border"><div class="character"><img src="https://tamagotchi-official.com/tamagotchi/jp/character/2024/12/12/zZTeTTl9qiIMQ1aL/29_%E3%82%B4%E3%83%96%E3%81%B4%E3%82%87%E3%82%93.png" alt="Character 9"><div class="overlay"><a href="./damas9.html" class="overlay"></a></div></div></div>
+    <div class="character-border"><div class="character"><img src="https://tamagotchi-official.com/tamagotchi/jp/character/2024/12/12/TvuECx3B8JfPWwoi/26_%E3%81%99%E3%82%89%E3%81%84%E3%81%BF%EF%BD%9E%E3%81%B1%E3%81%A3%E3%81%A1.png" alt="Character 10"><div class="overlay"><a href="./damas10.html" class="overlay"></a></div></div></div>
+  </div>
+</body>
+</html>
