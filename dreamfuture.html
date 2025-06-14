@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tama Village</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'DungGeunMo', sans-serif;
+      background: #a3e3ff;
+    }
+    header {
+      background: #4d009a;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      font-size: 30px;
+    }
+    .nav-icons {
+      display: flex;
+      gap: 10px;
+    }
+    .back-arrow, .home-icon {
+     width: 50px;
+     height: 50px;
+     background-size: cover;
+     background-position: center;
+     transition: background-image 0.3s ease;
+     }
+
+    .back-arrow {
+    background-image: url(뒤로가기.png);
+    }
+    .back-arrow:hover {
+    background-image: url(뒤로가기2.png);
+    }
+ 
+    .home-icon {
+    background-image: url(뒤로가기.png);
+    }
+
+    .home-icon:hover {
+    background-image: url(뒤로가기2.png);
+    }
+     .banner {
+      background-color: #64ccff;
+      background-image: url(./배경2.png);
+      background-size: 950px;
+      background-position: center;
+      text-align: center;
+      image-rendering: pixelated;
+      padding: 200px 0;
+    }
+   
+    .banner h1 {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 50px;
+      
+    }
+    .banner h1 span {
+  display: inline-block;
+  animation: popBounce 1.4s infinite;
+  animation-delay: calc(0.05s * var(--i));
+  color: #ffffff;
+  text-shadow: 1px 1px 0 #8000ff,
+            2px 2px 0 #6200c4,
+            3px 3px 0 #4a0094;
+  
+}
+
+@keyframes popBounce {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  30% {
+    transform: translateY(-4px) scale(1.1);
+    text-shadow: 0 0 5px #ad5aff, 0 0 10px #d2a6ff;
+  }
+  60% {
+    transform: translateY(1px) scale(0.98);
+  }
+}
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+    
+    .characters {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      background: #9148E2;
+      padding: 40px;
+      border-top: 15px double #bf87ff;
+      border-bottom: 15px double #bf87ff;
+      box-shadow: inset 0 0 20px rgba(255, 182, 193, 0.6);
+      position: relative;
+      z-index: 1;
+      justify-content: center;
+    }
+    .character {
+      position: relative;
+      background: #fccddc;
+      background-image: url(https://i.pinimg.com/736x/92/c5/84/92c584b8cada5cf6a61f2e0c5608cfe2.jpg);
+      background-size: cover;
+      background-position: center top -50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+      border-radius: 8px;
+      height: 160px;
+      width: 190px;
+      margin: 0 auto;
+      box-shadow: 4px 4px 0 #6c1cc8;
+      border: 2px solid #6c1cc8;
+      overflow: hidden;
+    }
+    .character:hover .overlay {
+    opacity: 1;
+    }
+
+   .overlay {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color:#ffa1ad71;
+   color: #fff;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-size: 18px;
+   font-weight: bold;
+   opacity: 0;
+   transition: opacity 0.3s ease;
+   border-radius: 8px;
+   text-shadow: 1px 1px 2px #000;
+   font-family: 'DungGeunMo', sans-serif;
+   }
+    .character img {
+      image-rendering: auto;
+      width: 130px;
+      height: 150px;
+      filter: drop-shadow(2px 2px 0 #ffffff) 
+              drop-shadow(-2px 2px 0 #ffffff)
+              drop-shadow(2px -2px 0 #ffffff)
+              drop-shadow(-2px -2px 0 #ffffff)
+              drop-shadow(15px 15px 18px rgba(0, 0, 0, 0.4));
+    }
+    .char1 img {margin-left: -5px;}
+    .char3 img {margin-left: -5px;}
+    .char4 img {width: 140px;}
+    .char5 img {width: 140px;}
+    .char6 img {width: 100px; margin-left: -10px;}
+    .char8 img {width: 140px;}
+
+    .logo-text {
+   font-family: 'Press Start 2P', cursive;
+   font-size: 24px;
+   text-decoration: none;
+   text-shadow: 5px 5px 0 #9b38ff, -5px -5px 0 #9b38ff;
+      color: #ffffff;
+   margin: 0 auto;
+   position: absolute;
+   top: 28px;
+   left: 50%;
+   transform: translateX(-50%);
+   display: inline-block;
+   z-index: 10;
+   }
+   .character-border {
+  display: inline-block;
+  padding: 10px;
+  border: 4px dashed #bf87ff;
+  border-radius: 12px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <a href="characters.html" class="back-arrow"></a>
+    <div><a href="tamagotchi.html" class="logo-text">TAMA VILLAGE </a></div>
+    <a href="tamagotchi.html" class="home-icon"></a>
+  </header>
+  <div class="banner">
+    <h1><span>D</span><span>R</span><span>E</span><span>A</span><span>M</span><span>F</span><span>U</span><span>T</span><span>U</span><span>R</span><span>E</span>
+  
+  <span>F</span><span>R</span><span>I</span><span>E</span><span>N</span><span>D</span><span>S</span></h1>
+  </div>
+  <div class="characters">
+    <div class="character-border"><div class="character char1"><img src="https://i.namu.wiki/i/Cdx93JvHjcSM8ubg5ogzh5ZIACUmmyoVMfvkLKIZVFbjIx_cm3_7kSHDH2g7VAw88HXjYS0ElQNqQkvd7W0psg.webp" alt="Character 1"><div class="overlay"><a href="./dreamf1.html" class="overlay"></a></div></div></div>
+    <div class="character-border"><div class="character char2"><img src="https://i.namu.wiki/i/qRLbHt37u9-1ktcTdCqnnfYdTeOGR0qY0lkVd6gTMgt3JOVa8AuYK1luzs0L039bdz0WdUNfRFB4txKpF8Jeqg.webp" alt="Character 2"><div class="overlay"><a href="./dreamf2.html" class="overlay"></a></div></div></div>
+    <div class="character-border"><div class="character char3"><img src="https://i.namu.wiki/i/IfZ4L_P-e_zfEdInZEPYovWeP1ic_OmL8nPuXL-sORTGD2xsNbzJUQeqbNgC5UHcmfN_BWzbXSzN-le-GHRmwg.webp" alt="Character 3"><div class="overlay"><a href="./dreamf3.html" class="overlay"></a></div></div></div>
+    <div class="character-border"><div class="character char4"><img src="https://i.namu.wiki/i/KpUu4IaUSh_0ZFYXy98c7vZEdnPu-8ZAT2YzuC4BNOAF7Yvn0K4mCPZytPFb5PSIZFSWgdPLbg49U3S7YY_3Yg.webp" alt="Character 4"><div class="overlay"><a href="./dreamf4.html" class="overlay"></a></div></div></div>
+    <div class="character-border"><div class="character char5"><img src="https://i.namu.wiki/i/Va9_ASdKJ_Vd8Neo3gKw2p5D-gzePCcrJP25bg6QgE2w21yZuNAhLxGljLISe-d90WnWfEHsSRUNbeuwa0M5Pg.webp" alt="Character 5"><div class="overlay"><a href="./dreamf5.html" class="overlay"></a></div></div></div>
+    <div class="character-border"><div class="character char6"><img src="https://i.namu.wiki/i/m-G3FAfKHxDQmwJUHvWZGKWdwnDpjqgcrQV03qht6-CNcnv-PfrSjoqLofqv2tLo9I4eVqKhEFHFWobLV7CuIg.webp" alt="Character 6"><div class="overlay"><a href="./dreamf6.html" class="overlay"></a></div></div></div>
+    <div class="character-border"><div class="character char7"><img src="https://i.namu.wiki/i/3m76CIEsDixAIL2KQV2Cn3VUj2GuHcHciwqF1yxVgj9d5h8qQBB5HpIzccvy7LS5lfXgxRO2Sv9bUqwYfUGcUQ.webp" alt="Character 7"><div class="overlay"><a href="./dreamf7.html" class="overlay"></a></div></div></div>
+    <div class="character-border"><div class="character char8"><img src="https://i.namu.wiki/i/ZjCz3env0FIpgAVFmWWKIhZi1JzzPIT92oGB-2ou4K2Q1akOsBCd5EXABoB6u086oP6kGUBitPscRmPXFRaiFg.webp" alt="Character 8"><div class="overlay"><a href="./dreamf8.html" class="overlay"></a></div></div></div>
+    <div class="character-border"><div class="character char9"><img src="https://i.namu.wiki/i/cEVDznyEsbt8-euGtNQ1OiyzZjW46SFyjFxJfw2Obw0s4G7ZHwoeVou-9h3IgzjW1CwO2cZghq5OsZxVVwZ3Hg.webp" alt="Character 9"><div class="overlay"><a href="./dreamf9.html" class="overlay"></a></div></div></div>
+    <div class="character-border"><div class="character char10"><img src="https://i.namu.wiki/i/tYUJ_EPmpt7pSWTSbvGsxgFALHoohBWkR7TzR1YzEI4Dnj4IZc78NNBK7Ow2SfLcgklK3mc7WLJTYtLKPvIyyQ.webp" alt="Character 10"><div class="overlay"><a href="./dreamf10.html" class="overlay"></a></div></div></div>
+  </div>
+</body>
+</html>
