@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>TAMA VILLAGE</title>
+  <link href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2107@1.0/DungGeunMo.css" rel="stylesheet"/>
+  <style>
+
+html, body {
+  margin: 0;
+  height: 100%;
+  font-family: 'DungGeunMo', sans-serif;
+  background-color: #66ccff;
+  background-image: url(https://tamagotchi-official.com/us/series/uni/images/howtoplay/be-unique/img_likes_02.gif);
+  image-rendering: pixelated;
+  background-size: 1400px;
+  background-repeat: no-repeat;
+  background-position: right -180px top -320px;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 400px;
+  background-color: #e0f7ff;
+  border-right: 4px solid #66ccff;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  padding: 14px;
+  box-sizing: border-box;
+  border-radius: 20px 0 0 20px;
+  max-height: 100vh;
+  overflow-y: auto
+}
+.sidebar::-webkit-scrollbar {
+  width: 8px;
+}
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: #66ccff;
+  border-radius: 10px;
+}
+.sidebar::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+
+.menu-item {
+  border: 5px solid #66ccff;
+  animation: borderBlink 1s infinite alternate;
+  color: #31bafe;
+  height: 70px;
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+@keyframes borderBlink {
+  from { border-color: #66ccff; }
+  to { border-color: #ffffff; }
+}
+
+.menu-item:hover {
+  background-color: #d0f0ff;
+  transform: scale(1.04);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.menu-item.active {
+  background-color: #66ccff;;
+  border-color: #31bafe;
+}
+
+.main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.header {
+  padding: 24px;
+  height: 150px;
+  text-align: center;
+  background-color: #b3ecff7c;  /* 연한 하늘색 */
+  backdrop-filter: contrast(50%);
+  image-rendering: pixelated;
+  background-position: center top -10px;
+  background-size: cover;
+  color: #004488;
+  border-bottom: 4px solid #66ccff;
+  border-radius: 0 0 20px 20px;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.header::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  backdrop-filter: blur(0px);
+  background-image: url(https://tamagotchi-official.com/us/series/uni/images/main/top/img_concept_catch_02.png);
+}
+
+.header h1 {
+ transform: translateY(70px) translateX(-10px);
+ font-size: 60px;
+}
+
+.content {
+  width: 1080px;
+  margin: 0 auto;
+  flex-grow: 1;
+  background-color: #b3ecffca; 
+  border: 4px solid #66ccff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  border-radius: 20px;
+  margin: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  transition: opacity 0.4s ease;
+  opacity: 1;
+  overflow-y: auto;
+  
+}
+
+.content.fade {
+  opacity: 0;
+}
+.content::-webkit-scrollbar {
+  width: 10px;
+}
+
+.content::-webkit-scrollbar-track {
+  background: #aee4ff;
+  border-radius: 10px;
+}
+
+.content::-webkit-scrollbar-thumb {
+  background: #66ccff;
+  border-radius: 10px;
+  border: 2px solid #fff;
+}
+
+.content::-webkit-scrollbar-thumb:hover {
+  background: #38bdff;
+}
+.content p {
+  font-size: 20px;
+  font-family: 'DungGeunMo', sans-serif;
+  color: #003377;
+  text-shadow: 1px 1px #ffffff;
+}
+
+
+
+.note {
+  border: 2px dashed #66ccff;
+  background-color: #e6faff;
+  height: 40px;
+  color: #002c66;
+  padding: 10px;
+  margin-bottom: 14px;
+  border-radius: 10px;
+  font-size: 24px;
+}
+.menu-1 {
+  background-color: #feffbb;  /* 빨간색 느낌 */
+  background-image: url('https://tamagotchi-official.com/tamagotchi/jp/character/2024/05/08/bdkMGPP0UIz3N8TO/04_%E3%81%BE%E3%82%81%E3%81%A3%E3%81%A1.png?_=6faa19525eb1668b4d9ce412ecd465ac');
+  background-size: 300px;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 0.2s ease, filter 0.2s ease;
+  font-size: 20px;
+}
+.menu-1:hover {
+  background-image: url(https://tamagotchi-official.com/tamagotchi/jp/character/2023/06/01/vmvwFIfcQhNWer4p/%E3%81%BE%E3%82%81%E3%81%A3%E3%81%A1_%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%97%E6%AD%A3%E6%96%B9%E5%BD%A2.png?_=9e90e1770259c1c85ce8be9f726435df);
+   background-size: 300px;
+  background-repeat: no-repeat;
+  background-position: center top -125px;
+  filter: saturate(1.1);
+  box-shadow: 0 0 4px #b2f2ff;
+  font-size: 20px;
+}
+.menu-2 {
+  background-color: #5cff66;  /* 빨간색 느낌 */
+  background-image: url('https://tamagotchi-official.com/tamagotchi/jp/character/2024/05/08/4frKfEULjB2o2oXS/05_%E3%81%8F%E3%81%A1%E3%81%B1%E3%81%A3%E3%81%A1.png?_=6faa19525eb1668b4d9ce412ecd465ac');
+  background-size: 270px;
+  background-repeat: no-repeat;
+  background-position: center top -70px;
+  font-size: 20px;
+  color: #ffffff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+.menu-2:hover {
+  background-image: url(https://tamagotchi-official.com/tamagotchi/jp/character/2023/06/03/Grs0icuCW5ffxTAh/%E3%81%8F%E3%81%A1%E3%81%B1%E3%81%A3%E3%81%A1_%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%97%E6%AD%A3%E6%96%B9%E5%BD%A2.png?_=9e90e1770259c1c85ce8be9f726435df);
+  background-size: 320px;
+  background-repeat: no-repeat;
+  background-position: center top -80px;
+  filter: saturate(1.1);
+  box-shadow: 0 0 4px #b2f2ff;
+  font-size: 20px;
+}
+.menu-3 {
+  background-color: #86e3ff;  /* 빨간색 느낌 */
+  background-image: url('https://tamagotchi-official.com/tamagotchi/jp/character/2024/05/08/oCksBD3WOHDqQSTl/06_%E3%81%BF%E3%81%BF%E3%81%A3%E3%81%A1.png?_=6faa19525eb1668b4d9ce412ecd465ac');
+  background-size: 300px;
+  background-repeat: no-repeat;
+  background-position: center top -120px;
+  font-size: 20px;
+}
+.menu-3:hover {
+  background-image: url(https://tamagotchi-official.com/tamagotchi/jp/character/2023/06/03/7bDlVADQACLZJXuR/%E3%81%BF%E3%81%BF%E3%81%A3%E3%81%A1_%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%97%E6%AD%A3%E6%96%B9%E5%BD%A2.png?_=9e90e1770259c1c85ce8be9f726435df);
+  background-size: 300px;
+  background-repeat: no-repeat;
+  background-position: center top -120px;
+  filter: saturate(1.1);
+  box-shadow: 0 0 4px #b2f2ff;
+  font-size: 20px;
+}
+.menu-4 {
+  background-color: #fffb7d;  /* 빨간색 느낌 */
+  background-image: url('https://tamagotchi-official.com/tamagotchi/jp/character/2024/05/08/WWN7B8joDDk4WJet/07_%E3%83%9D%E3%83%81%E3%81%A3%E3%81%A1.png?_=6faa19525eb1668b4d9ce412ecd465ac');
+  background-size: 300px;
+  background-repeat: no-repeat;
+  background-position: center top -90px;
+  font-size: 20px;
+}
+.menu-4:hover {
+  background-image: url(https://tamagotchi-official.com/tamagotchi/jp/character/2023/06/04/L6dm1V41cumHkqrh/%E3%81%9B%E3%81%B3%E3%82%8C%E3%81%A3%E3%81%A1_%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%97%E6%AD%A3%E6%96%B9%E5%BD%A2.png?_=d6b56eedf04caf724c32a06045b43596);
+  background-size: 300px;
+  background-repeat: no-repeat;
+  background-position: center top -100px;
+  filter: saturate(1.1);
+  box-shadow: 0 0 4px #b2f2ff;
+  font-size: 20px;
+}
+.menu-5 {
+  background-color: #ffc268;  /* 빨간색 느낌 */
+  background-image: url('https://tamagotchi-official.com/tamagotchi/jp/character/2024/05/08/xx0BslTVtXqaOz0a/08_%E3%82%81%E3%82%81%E3%81%A3%E3%81%A1.png?_=6faa19525eb1668b4d9ce412ecd465ac');
+  background-size: 270px;
+  background-repeat: no-repeat;
+  background-position: center top -98px;
+  font-size: 20px;
+}
+.menu-5:hover {
+  background-image: url(https://tamagotchi-official.com/tamagotchi/jp/character/2023/06/03/bfBUa57Abv7s6Aon/%E3%82%81%E3%82%81%E3%81%A3%E3%81%A1_%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%97%E6%AD%A3%E6%96%B9%E5%BD%A2.png?_=9e90e1770259c1c85ce8be9f726435df);
+  background-size: 300px;
+  background-repeat: no-repeat;
+  background-position: center top -140px;
+  filter: saturate(1.1);
+  box-shadow: 0 0 4px #b2f2ff;
+  font-size: 20px;
+}
+.menu-6 {
+  background-color: #ffa8b8;  /* 빨간색 느낌 */
+  background-image: url('https://tamagotchi-official.com/tamagotchi/jp/character/2024/05/08/fIMTsvU4u8L5a2lA/09_%E3%81%B5%E3%82%89%E3%82%8F%E3%81%A3%E3%81%A1.png?_=6faa19525eb1668b4d9ce412ecd465ac');
+  background-size: 265px;
+  background-repeat: no-repeat;
+  background-position: center top -100px;
+  font-size: 20px;
+}
+.menu-6:hover {
+  background-image: url(https://i.namu.wiki/i/wOGUauoibb0a2w-jLXvKhjd53tDQARKn_Z_vPzoTstH1AgoQXmtmwt_S6HgNwh7Dhso52_xjT8uEJnNnBe_yaA.webp);
+  background-size: 230px;
+  background-repeat: no-repeat;
+  background-position: center top -80px;
+  filter: saturate(1.1);
+  box-shadow: 0 0 4px #b2f2ff;
+  font-size: 20px;
+}
+.menu-7 {
+  background-color: #f0b8fb;  /* 빨간색 느낌 */
+  background-image: url('https://tamagotchi-official.com/tamagotchi/jp/character/2024/05/08/XjbYeIHXOjJQC1GX/10_%E3%81%B4%E3%82%85%E3%81%88%E3%82%8B%E3%81%A3%E3%81%A1.png?_=6faa19525eb1668b4d9ce412ecd465ac');
+  background-size: 280px;
+  background-repeat: no-repeat;
+  background-position: center top -110px;
+  font-size: 20px;
+}
+.menu-7:hover {
+  background-image: url(https://tamagotchi-official.com/tamagotchi/jp/character/2023/06/04/0HE2zGJokga2qh0x/%E3%81%B4%E3%82%85%E3%81%88%E3%82%8B_%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%97%E6%AD%A3%E6%96%B9%E5%BD%A2.png?_=d6b56eedf04caf724c32a06045b43596);
+  background-size: 250px;
+  background-repeat: no-repeat;
+  background-position: center top -95px;
+  filter: saturate(1.1);
+  box-shadow: 0 0 4px #b2f2ff;
+  font-size: 20px;
+}
+.menu-8 {
+  background-color: #ffaaaa;  /* 빨간색 느낌 */
+  background-image: url('https://tamagotchi-official.com/tamagotchi/jp/character/2024/05/08/X9QXrv0KcSLHIzUl/12_%E3%81%BF%E3%82%8B%E3%81%8F%E3%81%A3%E3%81%A1.png?_=6faa19525eb1668b4d9ce412ecd465ac');
+  background-size: 270px;
+  background-repeat: no-repeat;
+  background-position: center top -110px;
+  font-size: 20px;
+}
+.menu-8:hover {
+  background-image: url(https://tamagotchi-official.com/tamagotchi/jp/character/2023/06/04/zJpwsAatzz4R0lnw/%E3%81%BF%E3%82%8B%E3%81%8F%E3%81%A3%E3%81%A1_%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%97%E6%AD%A3%E6%96%B9%E5%BD%A2.png?_=d6b56eedf04caf724c32a06045b43596);
+  background-size: 260px;
+  background-repeat: no-repeat;
+  background-position: center top -105px;
+  filter: saturate(1.1);
+  box-shadow: 0 0 4px #b2f2ff;
+  font-size: 20px;
+}
+.menu-9 {
+  background-color: #977aff;  /* 빨간색 느낌 */
+  background-image: url('https://tamagotchi-official.com/tamagotchi/jp/character/2024/05/08/G58Rc0n0QppI1I39/13_%E3%81%94%E3%81%96%E3%82%8B%E3%81%A3%E3%81%A1.png?_=6faa19525eb1668b4d9ce412ecd465ac');
+  background-size: 270px;
+  background-repeat: no-repeat;
+  background-position: center top -85px;
+  font-size: 20px;
+}
+.menu-9:hover {
+  background-image: url(https://tamagotchi-official.com/tamagotchi/jp/character/2023/08/24/yHJwByWA8HH56lPh/MicrosoftTeams-imag.png?_=34ddca9d3ebacbfcb30b17e7cc7ca9ee);
+  background-size: 330px;
+  background-repeat: no-repeat;
+  background-position: center top -98px;
+  filter: saturate(1.1);
+  box-shadow: 0 0 4px #b2f2ff;
+  font-size: 20px;
+}
+.menu-10 {
+  background-color: #8affd4;  /* 빨간색 느낌 */
+  background-image: url('https://tamagotchi-official.com/tamagotchi/jp/character/2023/06/03/F4WxefuBqQy3sq2g/%E3%81%86%E3%83%BC%E3%81%B1%E3%81%A3%E3%81%A1_%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%97%E6%AD%A3%E6%96%B9%E5%BD%A2.png?_=9e90e1770259c1c85ce8be9f726435df');
+  background-size: 260px;
+  background-repeat: no-repeat;
+  background-position: center top -90px;
+  font-size: 20px;
+}
+.menu-10:hover {
+  background-image: url(https://tamagotchi-official.com/tamagotchi/jp/character/2024/12/12/CNMmPe8Ri2oNNkuD/28_%E3%83%A1%E3%83%87%E3%83%A5%E3%82%A6%E3%83%BC%E3%83%91.png?_=a78f7bee15b2b999f826b9297130a1d0);
+  background-size: 270px;
+  background-repeat: no-repeat;
+  background-position: center top -115px;
+  filter: saturate(1.1);
+  box-shadow: 0 0 4px #b2f2ff;
+  font-size: 20px;
+}
+.menu-label {
+  padding: 4px 8px;
+  border-radius: 8px;
+  display: inline-block;
+  margin-top: 3px;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.6);
+  color: #002c66; /* 어두운 글자색 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 살짝 그림자 */
+  backdrop-filter: blur(6px);
+}
+#music-toggle:hover {
+  animation: music-hover 0.5s ease-in-out;
+  transform: scale(1.3) rotate(10deg);
+}
+
+@keyframes balloon-pop {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  30% {
+    transform: scale(1.3);
+  }
+  60% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.back-arrow,
+  .home-icon {
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    background-position: center;
+    transition: background-image 0.3s ease;
+    display: inline-block;
+    z-index: 10;
+  }
+
+  .back-arrow {
+    background-image: url(뒤로가기.png);
+  }
+  .back-arrow:hover {
+    background-image: url(뒤로가기2.png);
+  }
+
+  .home-icon {
+    background-image: url(뒤로가기.png); /* 아이콘 다르면 여기도 변경 */
+  }
+  .home-icon:hover {
+    background-image: url(뒤로가기2.png);
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+    background-color: #66ccff;
+    background-image: url('./images/your-banner-image.png'); /* 필요시 변경 */
+    background-size: cover;
+    background-position: center;
+    padding: 0 20px;
+    position: relative;
+    border-bottom: 3px solid #26b7ff;
+  }
+
+  .logo-text {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 24px;
+    color: #ffffff;
+    text-shadow: 5px 5px 0 #007ffe, -5px -5px 0 #007ffe;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .logo-link {
+    text-decoration: none;
+    color: inherit;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <a href="tamagotchi.html" class="back-arrow"></a>
+
+    <h1 class="logo-text">
+      <a href="tamagotchi.html" class="logo-link">TAMA VILLAGE</a>
+    </h1>
+
+    <a href="tamagotchi.html" class="home-icon"></a>
+  </header>
+   
+
+  <div class="container">
+    <div class="sidebar">
+      <div class="menu-item menu-1 active" onclick="showContent(1)"> <span class="menu-label">1. 돈 버는 법</span></div>
+      <div class="menu-item menu-2" onclick="showContent(2)"><span class="menu-label">2. 다마고치들의 결혼</span></div>
+      <div class="menu-item menu-3" onclick="showContent(3)"><span class="menu-label">3. 애정도 올리는 법</span></div>
+      <div class="menu-item menu-4" onclick="showContent(4)"><span class="menu-label">4. 다마고치 아침시간</span></div>
+      <div class="menu-item menu-5" onclick="showContent(5)"><span class="menu-label">5.다마고치 성장하는법 </span></div>
+      <div class="menu-item menu-6" onclick="showContent(6)"><span class="menu-label">6.기기 연결하는법</span></div>
+      <div class="menu-item menu-7" onclick="showContent(7)"><span class="menu-label">7.화장실 가는 법</span></div>
+      <div class="menu-item menu-8" onclick="showContent(8)"><span class="menu-label">8.원하는 다마고치를 만나는 법</span></div>
+      <div class="menu-item menu-9" onclick="showContent(9)"><span class="menu-label">9.다마고치 염색</span></div>
+      <div class="menu-item menu-10" onclick="showContent(10)"><span class="menu-label">10.월드 해금법</span></div>
+      
+    </div>
+    <div class="main">
+      <div class="header">
+        <h1>HOW PLAY TAMAGOTCHI?</h1>
+      </div>
+      <div class="content" id="content-area">
+        <div class="note">제가 차근차근 알려드릴게요!</div>
+        <p>알고싶은 공략법을 눌러보세요~!</p>
+      </div>
+    </div>
+  </div>
+  
+
+  <script>
+    const contentArea = document.getElementById("content-area");
+    const menuItems = document.querySelectorAll(".menu-item");
+
+    const contents = {
+      1: `<div class="note">1. 돈 버는 법</div>
+          
+  <p>- 다마고치 내에서 획득한 골드G는 대물림 되며, 획득 아이템들도 가계도에 귀속된다.<br>
+
+- 다마고치 내 재화는 호텔이용 / 아이템 구매 / 인테리어 리폼 / 레스토랑 및 음식 구매 등에 사용된다.<br>
+<br>
+
+
+① 다마고치 기본적인 돈버는 방법 : 성장시 일정 재화 획득 (300G~800G) / 게임 센터 (백화점 게임 및 각종 맵의 미니게임) 한판 당 최대 200G<br>
+<br>
+
+② 다마고치 돈버는 방법 꼼수 : 2세대 부터는 1월 1일~7일에 부모님 집에 방문 시 세뱃돈(1000G)을 받을 수 있다.<br>
+
+3세대 부터는 새뱃돈을 2000G 받을 수 있다. 1월 1일에는 기상모션이 있기때문에 2일~7일로 날자를 되돌려서<br>
+
+다시 방문하는 식의 노가다를 통해 초반에 재화를 확보할 수 있다.<br>
+
+<br>
+
+- 다마고치 피스의 경우 오전 10시~ 오후12시 사이에 마당에 나가면 아이템을 판매할 수 있지만, 다른 모델의 경우 판매가 불가능하고 삭제만 가능하다.<br>
+
+- 아이템 획득 개수의 제한이 있다.(15개~24개 내외) 때문에 모든 아이템을 다 구매해서 소장하기는 불가능하고, 필요한 것 위주로 구매하면 된다.<br>
+
+- 냉장고에 보관되는 음식의 경우 최대 3개. (염색을 하려면 3개씩 먹고 다시 사와야함)<br>
+
+- 만약 구매갯수 제한이 초과되었을 때 아이템을 획득하게 된다면 삭제할 아이템을 선택해달라는 창이 뜨고 가지고 있던 것 중 하나를 삭제하면 된다.</p>`,
+      2: `<div class="note">2. 다마고치들의 결혼</div>
+           <img src="다마고치 결혼.png" alt="애정도 그래프" style="max-width:100%; border: 6px solid #26b7ff; border-radius: 10px; margin-bottom: 12px;">
+          
+          
+ <p>① 친밀도 확인 방법 : 9번째 메뉴(노트) - 다마리스트 에서 각 마을의 캐릭터와의 친밀도를 확인할 수 있다.<br>
+
+모르는 사이 - 아는 사이 - 친구 - 애인(이성)/친한친구(동성) - 열애중 순이다.<br>
+
+애인일 경우 백화점 - 쇼핑 - 주얼리 에서 반지를 구매 후 프로포즈를 하고 상대방이 수락 시 결혼이 가능하다.<br>
+
+비싼 반지의 경우 아는 사이일 때도 받아준다.<br>
+
+열애 중일 경우 해당 캐릭터가 거주하는 지역에 방문해 만난다면 반지 없이 프로포즈를 받을 수 있다.<br>
+<br>
+
+
+② 직계 부모가 캐릭터인 경우 패밀리로 표시되며, 결혼을 할 수 없다. (할아버지,할머니는 가능)<br>
+<br>
+
+
+③ 맵마다 등장하는 캐릭터가 다르고, 기계 모델과 각 시리즈의 버전마다 특별 등장하는 고유 캐릭터가 있다.<br>
+<br>
+
+
+④ 각 캐릭터는 좋아하는 장난감과 싫어하는 장난감이 있고, 좋아하는 장난감으로 함께 놀면 친밀도가 빨리 오른다.<br>
+<br>
+
+
+⑤ 다마고치 썸/미츠 - 메지컬,매르헨 캐릭터별 좋아하는 장난감</p>`,
+          
+      3: `<div class="note">3. 애정도 올리는 법</div>
+          <img src="다마고치 애정도.png" alt="애정도 그래프" style="max-width:100%; border: 6px solid #26b7ff; border-radius: 10px; margin-bottom: 12px;">
+          
+<p>① 애정도 확인 방법 : 애정도는 첫번째 메뉴(상태,설정) - 상태에 들어가서 A버튼을 누르면 확인 가능.<br>
+
+유아기~사춘기까지는 절반정도(하늘색부분)까지만 오르고 프렌드기가 되어야 MAX가 가능하다.<br>
+<br>
+
+② 각 시기의 MAX 애정도를 기준으로 일정 수준 이하까지 떨어지면, 애정결핍으로 호출 상태가 된다.<br>
+
+아픈 것과 호출의 구분 법은 해골 모양을 보면된다.(아프면 해골표시가 다마 주변에 있음)<br>
+<br>
+
+③ 애정도 높이는 방법 : 간식먹이기(10번 먹이면 충치가 생기는데 치료해주면 빨리 오름) / 놀아주기 / 다른 기계와 통신 / 샤워 / 청소 / 사진찍기<br>
+
+외출 후 쇼핑 / 기구 이용 / 게임 / 친구와 놀기 등 다마고치가 즐거워하는(해 모양이 빤짝거리는 모션) 모든 일.<br>
+<br>
+</p>`,
+      4: `<div class="note">4.다마고치 아침시간</div>
+          <img src="다마고치 아침.png" alt="애정도 그래프" style="max-width:100%; border: 6px solid #26b7ff; border-radius: 10px; margin-bottom: 12px;">
+<p>- 아침 7시 기상 저녁 8시 취침 (시간을 자신의 패턴에 맞추면 됨 / 시간 변경 시 자던애를 깨우거나 강제로 재울수 있음.)<br>
+
+- 아침 7시<br>
+
+① 공원에 나가면 랜덤으로 우와삿치 출현 - 랜덤으로 쿠폰을(리폼 50%할인or 액세서리 50%할인) 받을 수 있음. 중복으로 받아짐.<br>
+
+② 썸/미츠의 메르헨 모델의 경우 드림 리빙으로 리폼한 후 3세대 이후에 아침 7시에 마당에 나가면 메르헨랜드 맵이 해금됨.<br>
+
+③ 썸/미츠의 메르헨 모델의 경우 메르헨랜드의 메르헨라이드를 탑승하면 유니콘 풍선을 받을 수 있음.(현실 시간 하루 1번)<br>
+<br>
+
+- 아침 7시~ 오후5시,7시<br>
+
+① 반항기부터 썸,믹스의 경우 호텔 / 다른 모델의경우 어린이집 등에 데이케어를 맡길 수 있음.<br>
+
+호텔의 경우 시간당 10g가 소요되며, 최대 7시까지 맡겨지지만 오후 5시 이후에 찾아가면 친밀도가 깎임.<br>
+
+② 2세대 부터는 부모님 집에 공짜로 위탁할 수 있음. 오후 5시까지 가능.<br>
+<br>
+
+- 아침 10시~ 오후2시 59분<br>
+
+① 매달 0,10,20,30 등 0으로 끝나는 날 10시~오후2시59분 사이에 공원에 나가면 에코우사치와 만나며 에코데이 이벤트 발동.<br>
+
+에코백과 에코포크, 에코뱃지 중 1개를 랜덤으로 주며, 쌍둥이의 경우 2개를 획득 가능.<br>
+
+시간과 날자 조작으로 가능하나, 한번 받으면 오전 6시 59분으로 돌려 기상 모션을 한번 봐야 리셋된다.<br>
+
+에코백 : 모든 도구 50% / 에코포크 : 모든 음식 50% 쿠폰이므로 획득해 놓는게 좋다.<br>
+<br>
+
+- 오후 1시<br>
+
+① 미츠 산리오 : 딸기벽지로 리폼 후 2세대 이상일 때 오후 1시 이후 마당에 나가면 딸기왕국 맵이 해금 됨.<br>
+
+- 오후 6시<br>
+
+① 미츠 판타지 : 오후 6시 이후에 무도회에 가면 보석상자 획득.<br>
+<br>
+
+- 오후 7시<br>
+
+① 2세대 이후 천문대 리빙으로 리폼 후 오후7시에 마당에 나가면 밤하늘연구소 맵이 해금 됨.<br>
+
+② 미츠/썸 매지컬 : 매지컬 리빙으로 리폼 후 3세대 이후 오후 7시에 마당에 나가면 매지컬 랜드 맵이 해금 됨.<br>
+
+오후 7시에 매지컬랜드의 매지컬라이드를 탑승하면 호박 풍선을 받을 수 있음. (현실 시간 하루 1번)<br>
+
+③ 미츠 산리오 : 맑은 날 오후 7시에 마당으로 나가면 별의 세계 해금 됨.</p>`,
+      5: `<div class="note">5.다마고치 성장하는 법</div>
+          <img src="다마고치 성장.png" alt="애정도 그래프" style="max-width:100%; border: 6px solid #26b7ff; border-radius: 10px; margin-bottom: 12px;">
+          <img src="다마고치 성장1.png" alt="애정도 그래프" style="max-width:100%; border: 6px solid #26b7ff; border-radius: 10px; margin-bottom: 12px;">
+          <img src="다마고치 성장2.png" alt="애정도 그래프" style="max-width:100%; border: 6px solid #26b7ff; border-radius: 10px; margin-bottom: 12px;">
+          
+  <p>① 알 - 결혼 시 알을 획득<br>
+
+- 특정모델(썸/미츠)의 경우 쌍둥이도 등장<br>
+
+- 알에 금이 가기 시작하며 바로 유아기로 등장<br>
+<br>
+
+
+② 유아기(0세) - 약 1시간 (30분-40분 /중간 10분 취침)<br>
+
+- 상태창에서 성별 알 수 있음<br>
+
+- 친밀도/배고픔이 상시로 떨어져서 지속적인 모니터링이 필요함.<br>
+
+- 일부러 케어미스 내서(밥을 안주거나 돌봐주지 않아서 아프게 만듬) 성장캐릭을 조절할 수 있음.<br>
+
+- 외출 자체가 불가능이라 위탁을 못하고 직접 케어해야함.<br>
+
+- 친밀도 최대치 : 중간<br>
+
+- 할 수 없는 것 : 마당 외출 / 부모님 집 가기 / 마을 + 타운 밖으로 외출 / 액세서리 장착 / 결혼<br>
+<br>
+
+
+③ 반항기(1세) - 약 하루 (시간변경, 부모님집에 위탁, 호텔케어 등을 통해 한 두시간 밀리기도 함)<br>
+
+- 성장시 소정의 골드 지급 .(썸,미츠 : 300G)<br>
+
+- 부모 타마 집에서 독립해서 나감.<br>
+
+- 외출 관련 컨텐츠 해금 / 마당 외출 가능 / 호텔 or 부모님집 위탁 가능.<br>
+
+- 레스토랑 및 일반 음식 섭취 가능(염색 가능) : 염색 가능하나 성장 후 원래 색으로 되돌아옴.<br>
+
+- 친밀도 최대치 : 중간<br>
+
+- 할 수 없는 것 : 액세서리 장착 / 결혼<br>
+<br>
+
+
+④ 사춘기(1 or 2세) - 약 하루 (시간변경, 부모님집에 위탁, 호텔케어 등을 통해 한 두시간 밀리기도 함)<br>
+
+- 성장시 소정의 골드 지급 .(썸,미츠 : 500G)<br>
+
+- 친밀도 최대치 : 중간<br>
+
+- 염색 가능하나 성장 후 원래 색으로 되돌아옴.<br>
+
+- 할 수 없는 것 : 액세서리 장착 / 결혼<br>
+<br>
+
+
+⑤ 프렌드기(2 or 3세) - 결혼 가능<br>
+
+- 성장시 소정의 골드 지급 .(썸,미츠 : 800G)<br>
+
+- 친밀도 최대치 : MAX<br>
+
+- 액세서리 장착 / 염색 영구적용 가능 / 결혼 가능</p>`,
+      6: `<div class="note">6.기기 연결하는법</div>
+       <img src="다마고치 기계.png" alt="애정도 그래프" style="max-width:100%; border: 6px solid #26b7ff; border-radius: 10px; margin-bottom: 12px;">
+          
+<p>① A버튼 : 셀렉트 버튼<br>
+
+- 다음 메뉴 선택 / 게임 시 왼쪽 or 위 / 시계 화면에서 사용시 : AM,PM 변경 / 서핑게임 시 연타<br>
+<br>
+
+
+② B버튼 : 확인 버튼<br>
+
+- 집에서 사용시 : 마당으로 이동 / 마당에서 사용시 : 시계 / 게임 시 오른쪽 or 아래<br>
+<br>
+
+
+③ C버튼 : 취소 버튼<br>
+
+- 메뉴에서 사용시 : 취소 및 뒤로가기 / 집에서 사용시 : 놀아주기<br>
+<br>
+
+
+④ 뒷면 건전지 함 - AAA 건전지 2개<br>
+
+- 끝이 뭉툭한 얇은 막대로 하단 버튼 누르고 건전지 덮개를 아래로 내리면 열림 / 뚜껑을 닫으면 재부팅 됨.<br>
+<br>
+
+
+⑤ 리셋 버튼<br>
+
+- 리셋버튼을 뾰족한 것으로( 너무 뾰족한것 x 샤프심x : 파손위험) 누르면 재부팅과 함께 리셋이 됨.<br>
+
+- 리셋 버튼을 누르면 이어하기 / 새로 시작하기 중에 선택할 수 있다.<br>
+
+</p>`,
+      7: `<div class="note">7.화장실 가는 법</div>
+          <img src="다마고치 화장실.png" alt="애정도 그래프" style="max-width:100%; border: 6px solid #26b7ff; border-radius: 10px; margin-bottom: 12px;">
+          
+  <p> ① 화장실 이용 방법 : 보통 응가를 하면 화장실 아이콘 - 화장실을 이용해 치워줄 수 있음.<br>
+
+- 간혹 다마고치가 부들부들 거리는 모션을 할 때 재빠르게 화장실을 데리고가면 변기에 용변을 볼 수 있음.<br>
+
+- 만약 응가도 없고 모션도 없을 때 화장실에 가면 찡찡거리며 싫어함.<br>
+<br>
+② 목욕 및 청소 : 목욕과 청소를 오랫동안 하지 않으면 배경이나 캐릭터가 갈색으로 변한다.
+
+</p>`,
+      8: `<div class="note">8.원하는 다마고치를 만나는 법</div>
+          <img src="다마고치 아이템.png" alt="애정도 그래프" style="max-width:100%; border: 6px solid #26b7ff; border-radius: 10px; margin-bottom: 12px;">
+          <p>다마고치들이 좋아하는 아이템을 들고 월드로 접속하면 그 아이템을 원하는 다마고치가 나올 가능성이 올라간다.</p>`,
+      9: `<div class="note">9.다마고치 염색하는 법</div>
+          <img src="다마고치 염색.png" alt="애정도 그래프" style="max-width:100%; border: 6px solid #26b7ff; border-radius: 10px; margin-bottom: 12px;">
+  <p>- 유아기 이상의 다마고치는 특정 음식을 5회 섭취할 경우 염색이 가능하다. 염색 가능한 색상과 음식은 모델별로 다르다.<br>
+    <br>
+
+- 5회를 반드시 한번에 섭취할 필요는 없지만, 중간에 다른 음식을 먹거나 먹는 텀이 너무 길어지면 염색이 되지 않는다.<br>
+<br>
+
+- 프랜드기에 염색할 경우 영구 유지되지만, 사춘기 이전에 염색할 경우 성장과 동시에 원래의 색상으로 돌아온다.<br>
+<br>
+
+- 프랜드기에 염색하고 결혼할 경우, 유전은 염색된 색상으로 이루어진다.<br>
+<br>
+
+- 같은 기종의 경우 통신을 통해 음식을 선물로 주어 옮기면(최대3개씩 두번) 염색이 가능하다.
+
+</p>`,
+      10: `<div class="note">10.다마고치 월드 해금법</div>
+           <img src="다마고치 월드.png" alt="애정도 그래프" style="max-width:100%; border: 6px solid #26b7ff; border-radius: 10px; margin-bottom: 12px;">
+<p>- 만약 기계가 여러개라면, 기계 중 한 개만 맵이 해금되있으면 다른 기계의 맵을 해금할 수 있다.<br>
+
+통신-놀기-외출하기로 해당 맵을 데려갈 수 있다. 조건이 만족되지 않더라도 함께 방문한 기계는 그 맵이 해금된다.<br>
+
+(다만, 해당 기계에 해당 맵이 있어야함. ex- 산리오 전용맵에 파스텔 기계가 방문해도 산리오 맵은 얻을수 없다.)<br>
+<br>
+
+
+- 아래 그림의 숫자는 세대이다. 1세대,2세대,3세대(가계도의 세대) , 미츠 = 썸포함
+
+</p>`,
+    };
+
+    function showContent(index) {
+      // 메뉴 스타일
+      menuItems.forEach(item => item.classList.remove('active'));
+      menuItems[index - 1].classList.add('active');
+
+      // 페이드 아웃 > 변경 > 페이드 인
+      contentArea.classList.add('fade');
+      setTimeout(() => {
+        contentArea.innerHTML = contents[index];
+        contentArea.classList.remove('fade');
+      }, 300);
+    }
+  
+const bgm = document.getElementById('bgm');
+  const toggleImg = document.getElementById('music-toggle');
+  const musicStatus = document.getElementById('music-status');
+
+  let isPlaying = false;
+
+  // 자동 시작 시도
+  window.addEventListener('load', () => {
+    bgm.play().then(() => {
+      isPlaying = true;
+      updateMusicUI();
+    }).catch(e => {
+      console.log('자동재생 차단됨:', e);
+    });
+  });
+
+  toggleImg.addEventListener('click', () => {
+    if (isPlaying) {
+      bgm.pause();
+    } else {
+      bgm.play();
+    }
+    isPlaying = !isPlaying;
+    updateMusicUI();
+  });
+
+  function updateMusicUI() {
+    if (isPlaying) {
+      toggleImg.src = 'https://toy.bandai.co.jp/temp/vd9pdfxdcxmm5lyyri44bwr3pwhgjrnz86z19fm.gif';
+      toggleImg.style.width = '100px';
+      toggleImg.style.height = '100px';
+      toggleImg.style.position = 'absolute';  // 또는 'relative', 'fixed' 등 상황에 맞게
+      toggleImg.style.top = '-570px';
+      toggleImg.style.left = '-100px';
+      musicStatus.textContent = 'DANCE!';
+    } else {
+      toggleImg.src = 'https://toy.bandai.co.jp/temp/n0dczezlmdm5kzfzp0zi0spfnm8yuz649j1ry.gif';
+      toggleImg.style.width = '50px';
+      toggleImg.style.height = '50px';
+      toggleImg.style.position = 'absolute';  // 또는 'relative', 'fixed' 등 상황에 맞게
+      toggleImg.style.top = '-520px';
+      toggleImg.style.left = '-80px';
+      musicStatus.textContent = 'Music Off';
+    }
+  }
+
+
+  </script>
+</body>
+</html>
+
+
