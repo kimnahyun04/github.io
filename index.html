@@ -210,6 +210,16 @@
     .blinking-text {
       animation: blink 1s infinite;
     }
+    h1 a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    }
+    h1 a:hover,
+    h1 a:focus {
+    text-decoration: none;
+    color: inherit;
+    }
 
     footer {
       width: 100%;
@@ -251,7 +261,9 @@
 <body>
   <header>
     <div class="logo">TAMA VILLAGE</div>
-    <h1><div class="bottom-text blinking-text">WHAT IS TAMAGOTCHI?</div></h1>
+    <h1 class="blinking-text bottom-text">
+    <a href="what.html">WHAT IS TAMAGOTCHI?</a>
+    </h1>
     <div class="menu-bar">
       <a href="characters.html" class="menu-item menu-item1">전체 캐릭터 구경하기</a>
       <a href="intro.html" class="menu-item menu-item2">내 캐릭터 보관함</a>
