@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>WHAT IS TAMAGOTCHI?</title>
+  <link href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2107@1.0/DungGeunMo.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f0faff;
+      background-image: url(./배경8.png);
+      background-position: center;
+      background-size: cover;
+      image-rendering: pixelated;
+      font-family: 'DungGeunMo', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #000;
+      overflow-x: hidden;
+      
+    }
+
+    /* 픽셀 비눗방울 래퍼 */
+    .bubble-wrapper {
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      background: url('./픽셀-비눗방울.png') no-repeat center center;
+      background-size: contain;
+      image-rendering: auto;
+      filter: drop-shadow(15px 15px 18px rgba(0, 0, 0, 0.4));
+      transition: transform 0.4s ease;
+      z-index: 4;
+      
+    }
+    .bubble-wrapper:hover {
+      transform: scale(2);
+      cursor: pointer;
+    }
+
+    /* 타마고치 이미지는 래퍼 안에서 가운데, 반투명 효과 적용하여 비눗방울 안에 갇힌 느낌 */
+    .floating-tama {
+      position: absolute;
+      top: 105px;  /* (300 - 104) / 2 */
+      left: 105px; /* (300 - 104) / 2 */
+      width: 90px;
+      height: 90px;
+      cursor: pointer;
+      transition: transform 0.4s ease;
+      image-rendering: auto;
+      border: none;
+      box-shadow: none;
+      opacity: 0.8; /* 반투명 효과 유지 */
+      z-index: 2;
+    }
+    
+
+    .explode {
+      animation: explode 0.5s ease forwards;
+    }
+    @keyframes explode {
+      from { transform: scale(1); opacity: 1; }
+      to   { transform: scale(2); opacity: 0; }
+    }
+
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      position: relative;
+    }
+
+    .header {
+      background-color: #0084ff;
+      color: #fff;
+      font-size: 32px;
+      padding: 20px 200px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      position: absolute;
+      top: 40vh;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: all 0.8s ease;
+      display: none;
+      z-index: 10;
+      cursor: pointer;
+    }
+
+    .header.fixed {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: block;
+      animation: none;
+    }
+    .header:hover {
+      transform: translateX(-50%) scale(1.1);
+    }
+
+    .content-wrapper {
+      display: grid;
+      grid-template-areas:
+        "image main"
+        "submain submain"
+        "logos logos";
+      grid-template-columns: 1fr 2fr;
+      gap: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      width: 100%;
+      margin-top: 100px;
+    }
+    .header.fixed + .content-wrapper {
+      margin-top: 180px;
+    }
+    .content-wrapper.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .section {
+      background-color: #007bffb4;
+      border: 6px solid #00bfff;
+      padding: 24px;
+      border-radius: 16px;
+      min-height: 200px;
+      font-size: 18px;
+      color: #fff;
+      box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .image-section {
+      grid-area: image;
+      /* 이미지 섹션 높이 고정 및 내부 스크롤 또는 잘림 처리 */
+      max-height: 300px;
+      overflow: hidden;
+      position: relative;
+    }
+    .image-section img {
+      width: 100%;
+      height: auto;
+      max-height: 100%;
+      object-fit: cover;
+      display: block;
+      margin: 0 auto;
+      border: 4px solid #00bfff;
+      border-radius: 12px;
+    }
+    .main-section, .sub-section {
+      overflow-y: auto;
+      max-height: 300px;
+      scrollbar-width: thin;
+      scrollbar-color: #00bfff #e6faff;
+    }
+    /* Webkit 스크롤바 */
+    .main-section::-webkit-scrollbar, .sub-section::-webkit-scrollbar {
+      width: 8px;
+    }
+    .main-section::-webkit-scrollbar-track, .sub-section::-webkit-scrollbar-track {
+      background: #e6faff;
+      border-radius: 4px;
+    }
+    .main-section::-webkit-scrollbar-thumb, .sub-section::-webkit-scrollbar-thumb {
+      background-color: #00bfff;
+      border-radius: 4px;
+      border: 2px solid #e6faff;
+    }
+    .main-section { grid-area:main; }
+    .sub-section { grid-area:submain; }
+    .logos-section {
+  grid-area: logos;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+}
+    .logos-section img {
+  width: 250px;
+  margin: 0;
+  border-radius: 12px;
+  background: transparent;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  border: 4px solid #00bfff;
+  border-radius: 12px;
+}
+.logos-section img:hover {
+  transform: scale(1.5);
+}
+
+
+    .footer {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 16px;
+      color: #005577;
+    }
+    .bubble-wrapper.exit-bubble {
+      width: 100px;
+      height: 100px;
+      background: url('./픽셀-비눗방울.png') no-repeat center center;
+      background-size: contain;
+      filter: drop-shadow(5px 5px 10px rgba(0,0,0,0.3));
+      z-index: 12;
+    }
+    .bubble-wrapper.exit-bubble::before { display: none; }
+
+    #back-btn {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      padding: 12px 24px;
+      background-color: #ffffff;
+      color: #00bfff;
+      border: 2px solid #00bfff;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 20px;
+      text-decoration: none;
+      z-index: 20;
+    }
+    #back-btn:hover {
+      background-color: #e6faff;
+    }
+    #back-btn:hover {
+      background-color: #e6faff;
+    }
+
+  </style>
+</head>
+<body>
+  <a id="back-btn" href="tamagotchi.html">메인으로</a>
+  <audio id="pop-sound" src="https://www.soundjay.com/button/sounds/button-16.mp3"></audio>
+  <audio id="bubble-sound" src="./비눗방울소리.mp3"></audio>
+
+
+  <div class="container">
+    <div class="header" id="header">WHAT IS TAMAGOTCHI?
+    </div>
+    <div class="content-wrapper" id="content-wrapper">
+      <div class="section image-section" id="sec1">
+        <img src="https://tamagotchi-official.com/us/series/uni/images/tamaverse/img_map.gif" class="retro-image" alt="Tamagotchi Intro">
+      </div>
+      <div class="section main-section" id="sec2">
+        <h2>다마고치</h2>
+        <p>다마고치(일본어: たまごっち 다마고치[*])는 일본어 단어 ‘다마고(たまご, 달걀)’와 영어 단어 ‘워치(watch, 시계)’의 합성어로 1996년 일본의 주부 아키 마이타가 개발해 이후 반다이가 아이디어를 사서 시장에 내놓은 휴대용 디지털 반려동물이다.<br> 
+           <br>
+           다마고치는 작고 간단한 달걀 모양의 컴퓨터 안에 살며, 플레이어는 왼쪽부터 A, B, C, 이 세 개의 버튼을 이용해 다음과 같이 다마고치와 다양한 방법으로 놀아줄 수 있다.<br>
+           <br>
+           "다마고치 썸"이라는 이름으로 한국어가 지원되는 다마고치가 출시되기도 했다. 최근 '버블티 다마고치', '얌얌잼 하우스'가 출시되기도 했다.<br>
+           <br>
+            다마고치는 출시 이후 전 세계적으로 폭발적인 인기를 얻었다. 미국 뉴욕에서는 1997년 5월 단 3일 만에 3만 개라는 놀라운 판매량을 기록했다.[1] 다마고치는 이후 게임보이, 닌텐도 DS, 위, 닌텐도 3DS용 게임 소프트웨어로도 개발되었다.<br>
+            <br>
+            현재 일본어 판 최신 버전은 "다마고치 스위츠"이다. 또한, 한국 버전도 나왔는데 이것은 "다마고치 썸"이다. (둘 다 2019 ~ 2020년 기준), 2020년 6월 기준, 이것은 에바치이며, 2020년 10월 기준 귀멸의 다마고치이다.<br>
+            <br>
+            최근에는 기존의 다마고치에 카메라가 장착되고 화면은 흑백이 아닌 컬러로 바뀐 '픽스(Pix)'가 2021년 7월부터 판매된다고 발표하였고[2], 일본에는 2021년 11월 23일에 '다마고치 스마트'라는 판매된다고 발매하였다.<br>
+            <br>
+            2009년 10월 12일부터 2015년 9월 24일까지 OLM에서 제작하고 TV 도쿄 계열에서 방영한 동명의 애니메이션 시리즈가 공개되었다고한다.</p>
+      </div>
+      <div class="section sub-section" id="sec3">
+        <h2>다마고치 특징</h2>
+        <p>발매 당시 장르는 '사이버 애완동물'이었으며, 여고생들과 여중생들을 주요 타겟으로 한 '포켓 사이즈의 작고 귀여운 가상 애완동물'이 주요 판매 전략이었다. 이름의 유래는 알(たまご) + 애칭형 접미어 치(っち).<br>
+          <br>
+          일본어 위키에 의하면 알(たまご)과 손목시계(ウォッチ)라고 한다.2017년까지 전세계에서 8,200만 대가 판매되었다.<br>
+          <br>
+          대한민국에서는 1997년에 대원동화를 통해 정발되었으며, 짝퉁 또한 수두룩하게 나왔다.가격대는 짝퉁 5,000~6,000원대, 정품 10,000원대. 2004년 '다마고치 플러스' 때는 한빛소프트가 팔았다가 2014년부터 반다이 남코 코리아가 판매중이다.<br>
+          <br>
+          국내에서는 다마고치 플러스 이후로 한참 동안 명맥이 끊겼다가 2014년에 iD L 시리즈가 도입되었을 정도로 유행이 지났지만, 일본이나 미국 쪽에선 파생작들이 꾸준히 정발되면서 인기를 계속 유지하고 있다.<br>
+          <br>
+          처음에는 알 상태에서 시작하고, 알을 부화하면 새끼가 나오는데 여기서 어떻게 키우느냐에 따라서 다양한 형태로 진화를 한다. 귀엽게 보살피는 것 외에도 밥도 줘야 하고, 배설물을 치워줘야 하는 등 여러 가지 의미에서 '애완동물을 키운다는 것'을 장난감으로 구현한 것이다.<br>
+          <br>
+          특히 당시 일본과 한국에서는 주거조건의 악화와 불황, 그외 여러 가지 문제로 인해 애완동물을 실제로 키우기가 많이 어려워져서 아이보나 애완돌같은 것까지 나오고 있었기 때문에 애완동물에 대한 우호도가 높았던 젊은 여성들이 사게 되면서 다마고치는 크게 히트했다.<br>
+          <br>
+          애플 피핀의 흑역사급 대망으로 인해 속된 말로 박살날뻔한 반다이를 부활시킨게 바로 다마고치이다.<br>
+          <br>
+          여담으로 디지몬 시리즈가 이 다마고치의 파생작이다. 디지몬 중 모야몬과 할배몬 같이 다마고치 캐릭터를 모티브로 한 캐릭터는 있긴 하지만 설정상의 접점은 없으며, 콜라보레이션도 이루어진 적이 전혀 없다.</p>
+      </div>
+      <div class="section logos-section" id="sec4">
+        <h2>사이트 바로가기</h2>
+        <a href="https://www.bandai.co.jp" target="_blank">
+        <img src="https://logos-world.net/wp-content/uploads/2023/05/Bandai-Logo.png" alt="Bandai"></a>
+        <a href="https://www.figurebang.co.kr/mall/list?keyword=%EB%8B%A4%EB%A7%88%EA%B3%A0%EC%B9%98" target="_blank">
+        <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f8261b1e-8f76-4e54-8d9a-d070a2f78e11/df5a2ty-eb2bb1da-16ac-4a3b-af35-5ce375fd8342.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2Y4MjYxYjFlLThmNzYtNGU1NC04ZDlhLWQwNzBhMmY3OGUxMVwvZGY1YTJ0eS1lYjJiYjFkYS0xNmFjLTRhM2ItYWYzNS01Y2UzNzVmZDgzNDIucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.3xCMFLuFSPLVly1SyHAnMCLKHZ5G5ddvjawfYHnRUxM" alt="Wiz"></a>
+      </div>
+    </div>
+    <div class="footer">© 2025 Tama village | Made by 20232493 Kim Nahyun</div>
+  </div>
+
+  <script>
+    const characterUrls = [
+      "https://tamagotchi-official.com/tamagotchi/jp/character/2024/05/08/XjbYeIHXOjJQC1GX/10_%E3%81%B4%E3%82%85%E3%81%88%E3%82%8B%E3%81%A3%E3%81%A1.png",
+      "https://tamagotchi-official.com/tamagotchi/jp/character/2023/06/04/w2aVnL5ysfcKIIG9/%E3%82%86%E3%81%AB%E3%81%BE%E3%82%8B%E3%81%A3%E3%81%A1_%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%97%E6%AD%A3%E6%96%B9%E5%BD%A2.png",
+      "https://tamagotchi-official.com/tamagotchi/jp/character/2023/06/03/o3qT1XoSm0pQVNMH/%E3%83%90%E3%83%96%E3%83%AB%E3%81%A3%E3%81%A1_%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%97%E6%AD%A3%E6%96%B9%E5%BD%A2.png",
+      "https://tamagotchi-official.com/tamagotchi/jp/character/2023/06/03/F4WxefuBqQy3sq2g/%E3%81%86%E3%83%BC%E3%81%B1%E3%81%A3%E3%81%A1_%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%97%E6%AD%A3%E6%96%B9%E5%BD%A2.png",
+      "https://tamagotchi-official.com/tamagotchi/jp/character/2023/06/03/CgoIIIEPHSIiOR8d/%E3%81%B4%E3%81%93%E3%81%A1%E3%82%85%E3%81%A3%E3%81%A1_%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%97%E6%AD%A3%E6%96%B9%E5%BD%A2.png",
+      "https://tamagotchi-official.com/tamagotchi/jp/character/2023/06/03/2JsHw1p9Ke5ZawTU/%E3%83%93%E3%83%83%E3%82%AF%E3%82%B9%E3%83%9E%E3%82%A4%E3%83%AB_%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%97%E6%AD%A3%E6%96%B9%E5%BD%A2.png",
+      "https://tamagotchi-official.com/tamagotchi/jp/character/2023/06/03/xLtHM2xgE6JXG5VY/%E3%82%B7%E3%83%A3%E3%82%A4%E3%82%AF%E3%81%A3%E3%81%A1_%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%97%E6%AD%A3%E6%96%B9%E5%BD%A2.png",
+      "https://tamagotchi-official.com/tamagotchi/jp/character/2023/06/03/bfBUa57Abv7s6Aon/%E3%82%81%E3%82%81%E3%81%A3%E3%81%A1_%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%97%E6%AD%A3%E6%96%B9%E5%BD%A2.png",
+      "https://tamagotchi-official.com/tamagotchi/jp/character/2023/06/01/vmvwFIfcQhNWer4p/%E3%81%BE%E3%82%81%E3%81%A3%E3%81%A1_%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%97%E6%AD%A3%E6%96%B9%E5%BD%A2.png",
+      "https://tamagotchi-official.com/tamagotchi/jp/character/2023/06/03/Grs0icuCW5ffxTAh/%E3%81%8F%E3%81%A1%E3%81%B1%E3%81%A3%E3%81%A1_%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%97%E6%AD%A3%E6%96%B9%E5%BD%A2.png",
+      "https://tamagotchi-official.com/tamagotchi/jp/character/2023/06/03/7bDlVADQACLZJXuR/%E3%81%BF%E3%81%BF%E3%81%A3%E3%81%A1_%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%97%E6%AD%A3%E6%96%B9%E5%BD%A2.png",
+      "https://tamagotchi-official.com/tamagotchi/jp/character/2023/06/04/KH6GFEzAU1A2lFtr/%E3%81%8D%E3%81%8D%E3%81%A3%E3%81%A1_%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%97%E6%AD%A3%E6%96%B9%E5%BD%A2.png",
+      "https://tamagotchi-official.com/tamagotchi/jp/character/2023/06/04/L6dm1V41cumHkqrh/%E3%81%9B%E3%81%B3%E3%82%8C%E3%81%A3%E3%81%A1_%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%97%E6%AD%A3%E6%96%B9%E5%BD%A2.png",
+      "https://tamagotchi-official.com/tamagotchi/us/character/2023/06/03/DYHOzoQRJWnm3E6r/%E3%81%94%E3%81%96%E3%82%8B%E3%81%A3%E3%81%A1_%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%97%E6%AD%A3%E6%96%B9%E5%BD%A2.png",
+      "https://tamagotchi-official.com/tamagotchi/jp/character/2023/06/04/P5B3JOSItfhFoaZV/%E3%81%97%E3%81%BE%E3%81%90%E3%82%8B_%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%97%E6%AD%A3%E6%96%B9%E5%BD%A2.png"
+    ];
+let caught = 0;
+    const header = document.getElementById('header');
+    // 처음에는 헤더 클릭 비활성화
+    header.style.pointerEvents = 'none';
+    const wrapperContainer = document.getElementById('content-wrapper');
+    function createFloatingTama(url) {
+      const wrapper = document.createElement('div'); wrapper.classList.add('bubble-wrapper'); document.body.appendChild(wrapper);
+      const img = document.createElement('img'); img.src = url; img.classList.add('floating-tama'); wrapper.appendChild(img);
+      let x = Math.random() * (window.innerWidth - wrapper.offsetWidth);
+      let y = Math.random() * (window.innerHeight - wrapper.offsetHeight);
+      wrapper.style.left = x + 'px'; wrapper.style.top = y + 'px';
+      let dx = (Math.random() - 0.5) * 2, dy = (Math.random() - 0.5) * 2;
+      function animate() {
+        if (!img.classList.contains('explode')) {
+          x += dx * 2; y += dy * 2;
+          const maxX = window.innerWidth - wrapper.offsetWidth;
+          const maxY = window.innerHeight - wrapper.offsetHeight;
+          if (x < 0) { x = 0; dx = -dx; }
+          if (x > maxX) { x = maxX; dx = -dx; }
+          if (y < 0) { y = 0; dy = -dy; }
+          if (y > maxY) { y = maxY; dy = -dy; }
+          wrapper.style.left = x + 'px';
+          wrapper.style.top = y + 'px';
+          requestAnimationFrame(animate);
+        }
+      }
+       animate();
+      img.addEventListener('click', () => {
+        wrapper.classList.add('explode');
+        img.classList.add('explode');
+        const pop = document.getElementById('bubble-sound'); pop.currentTime = 0; pop.play();
+        setTimeout(() => {
+          wrapper.remove();
+          // 모든 버블(wrapper) 제거된 후에만 헤더 표시
+          if (document.querySelectorAll('.bubble-wrapper').length === 0) {
+            header.style.display = 'block';
+            header.style.pointerEvents = 'auto';
+          }
+        }, 500);
+      });
+    }
+     function createExitBubble() {
+      const wrapper = document.createElement('div');
+      wrapper.classList.add('bubble-wrapper', 'exit-bubble');
+      document.body.appendChild(wrapper);
+      let x = Math.random() * (window.innerWidth - wrapper.offsetWidth);
+      let y = Math.random() * (window.innerHeight - wrapper.offsetHeight);
+      wrapper.style.left = x + 'px';
+      wrapper.style.top = y + 'px';
+      let dx = (Math.random() - 0.5) * 2, dy = (Math.random() - 0.5) * 2;
+      function animateExit() {
+        x += dx * 2; y += dy * 2;
+        const maxX = window.innerWidth - wrapper.offsetWidth;
+        const maxY = window.innerHeight - wrapper.offsetHeight;
+        if (x < 0 || x > maxX) dx = -dx;
+        if (y < 0 || y > maxY) dy = -dy;
+        wrapper.style.left = Math.max(0, Math.min(x, maxX)) + 'px';
+        wrapper.style.top = Math.max(0, Math.min(y, maxY)) + 'px';
+        requestAnimationFrame(animateExit);
+      }
+      animateExit();
+      wrapper.addEventListener('click', () => {
+        window.location.href = '/';
+      });
+    }
+
+    characterUrls.forEach(createFloatingTama);
+    let shown=false; header.addEventListener('click',()=>{shown=!shown; header.classList.toggle('fixed',shown); wrapperContainer.classList.toggle('show',shown); ['sec1','sec2','sec3','sec4'].forEach((id,i)=>setTimeout(()=>document.getElementById(id).classList.toggle('visible',shown),300*i));});
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
