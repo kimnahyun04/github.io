@@ -426,6 +426,20 @@ html, body {
     text-decoration: none;
     color: inherit;
   }
+    @media screen and (max-width: 768px) {
+      .main {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        border-right: none;
+        border-bottom: 4px solid #66ccff;
+      }
+
+      .content {
+        margin: 10px;
+      }
+    }
 </style>
 </head>
 <body>
