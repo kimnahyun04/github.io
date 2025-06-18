@@ -161,10 +161,21 @@ html, body {
   color: #003377;
   text-shadow: 1px 1px #ffffff;
 }
- @media (max-width: 1400px) {
+  @media (max-width: 1400px) {
       html, body {
-        background-size: 100% auto;
+        background-size: contain;
         background-position: center top;
+      }
+      .header {
+        height: 180px;
+        background-size: cover;
+      }
+      .header h1 {
+        font-size: 60px;
+        transform: translateY(70px);
+      
+        
+      
       }
     }
 
