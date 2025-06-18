@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>다마고치 서랍</title>
+  <style>
+    @font-face {
+      font-family: 'DungGeunMo';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/DungGeunMo.woff') format('woff');
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'DungGeunMo', sans-serif;
+      background: linear-gradient(to bottom, #a2e0ff, #b2f0ff);
+      background-color: #d900ffcc;
+      background-image: url(https://tamagotchi-official.com/us/series/uni/images/howtoplay/be-unique/img_character_03.gif);
+      background-repeat: no-repeat;
+      background-position: center top 90%;
+      background-size: cover;
+      background-attachment: fixed;
+      image-rendering: pixelated;
+      filter: brightness(1.1) contrast(1.1);
+    }
+    @media (max-width: 1400px) {
+      .body {
+        background-size: contain;
+        background-position: center top 90%;
+      }
+    }
+
+    header {
+      background: #d900ffcc;
+      text-shadow: 3px 3px 0 #0015ff, -3px -3px 0 #0015ff;
+      color: #ffcc00;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      font-size: 30px;
+    }
+    
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 100px;
+      padding: 60px;
+      
+    }
+
+    .left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* 위/아래 요소 고정 */
+  align-items: center;
+  height: 600px; /* 고정 높이 설정 */
+  text-align: center;
+}
+
+.speak-bubble {
+  background: white;
+  padding: 10%;
+  border: 3px solid black;
+  font-size: 2.5vh;
+  box-shadow: 2px 2px 0 black;
+  display: inline-block;
+  position: relative;
+  white-space: pre-line;  /* ✅ 줄바꿈 유지 */
+  z-index: 10;
+}
+
+
+.character-preview {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  margin-bottom: 20px; /* 하단 여백 */
+}
+
+    .character-preview img {
+      margin: 30px 0;
+      width: 300px;
+      image-rendering: pixelated;
+    }
+
+    .drawer-wrapper {
+      flex: 1.2;
+      background: #ffffff66;
+      padding: 5%;
+      border: 4px solid #000;
+      box-shadow: 0 0 0 6px #ff00ff, 0 0 0 10px #000;
+      position: relative;
+      transform: translateX(0%);
+      display: flex;
+      flex-wrap: wrap;            
+      justify-content: center;     
+      align-items: center;         
+      gap: 5%;                   
+      height: 100%;   
+    }
+
+    .drawer-title {
+      font-size: 2vw;
+      margin-bottom: 10%;
+      color: #333;
+      text-shadow: 1px 1px 0 #fff;
+    }
+
+    .right {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .slot {
+      border: 2px dashed #999;
+      width: 160px;
+      height: 160px;
+      background-color: rgba(255, 255, 255, 0.5);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      box-shadow: inset 0 0 8px #aaa;
+    }
+
+    .slot img {
+      max-width: 100px;
+      max-height: 100px;
+      transition: transform 0.3s ease;
+    }
+
+    .slot img:hover {
+      transform: scale(1.1) rotate(2deg);
+    }
+
+    .delete-btn {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      background-color: #fff;
+      color: red;
+      border: 1px solid red;
+      font-size: 12px;
+      padding: 4px 6px;
+      cursor: pointer;
+    }
+
+    button {
+      font-family: 'DungGeunMo';
+      background-color: pink;
+      padding: 16px 30px;
+      font-size: 20px;
+      border: 2px solid black;
+      cursor: pointer;
+      box-shadow: 2px 2px 0 black;
+      margin-top: 10px;
+      display: block;
+      position: relative;
+    }
+
+    button:hover {
+      background-color: #ffccff;
+      transform: scale(1.05);
+    }
+
+    button:active {
+      background-color: #ffaaff;
+      transform: scale(0.95);
+    }
+    .back-arrow, .home-icon {
+     width: 50px;
+     height: 50px;
+     background-size: cover;
+     background-position: center;
+     transition: background-image 0.3s ease;
+     display: inline-block;
+     z-index: 10;
+     }
+
+    .back-arrow {
+    background-image: url(뒤로가기.png);
+    }
+    .back-arrow:hover {
+    background-image: url(뒤로가기2.png);
+    }
+ 
+    .home-icon {
+    background-image: url(뒤로가기.png);
+    }
+
+    .home-icon:hover {
+    background-image: url(뒤로가기2.png);
+    }
+    .logo-text {
+   font-family: 'Press Start 2P', cursive;
+   font-size: 24px;
+   text-decoration: none;
+   text-shadow: 5px 5px 0 #0015ff, -5px -5px 0 #0015ff;
+   color: #ffcc00;
+   margin: 0 auto;
+   position: absolute;
+   top: 28px;
+   left: 50%;
+   transform: translateX(-50%);
+   display: inline-block;
+   z-index: 10;
+   }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="tama some.html" class="back-arrow"></a>
+    <div><a href="tamagotchi.html" class="logo-text">TAMA VILLAGE </a></div>
+    <a href="tamagotchi.html" class="home-icon"></a>
+  </header>
+
+
+  <div class="container">
+    <div class="left">
+      <div class="speak-bubble" id="bubbleText">날 데려와줘서 고마워~<br>서랍에 들어가고싶어!</div>
+      <div class="character-preview" id="characterPreview">
+        <img id="mainCharacter"src="" alt="캐릭터" style="display:none;" width="200"/>
+      </div>
+      <button onclick="addToDrawer()">서랍에 넣기</button>
+    </div>
+
+    <div class="drawer-wrapper">
+      <div class="drawer-title"> 캐릭터 보관함 </div>
+      <div class="right" id="drawer"></div>
+    </div>
+  </div>
+
+  <script>
+  const drawerEl = document.getElementById('drawer');
+  const previewEl = document.getElementById('characterPreview');
+  const bubbleTextEl = document.getElementById('bubbleText');
+  const SLOT_COUNT = 9;
+
+  function initializeStorage() {
+    if (!localStorage.getItem('drawerItems')) {
+      localStorage.setItem('drawerItems', JSON.stringify(Array(SLOT_COUNT).fill("")));
+    }
+  }
+
+  function renderDrawer() {
+    const stored = JSON.parse(localStorage.getItem('drawerItems'));
+    drawerEl.innerHTML = '';
+
+    for (let i = 0; i < SLOT_COUNT; i++) {
+      const slot = document.createElement('div');
+      slot.className = 'slot';
+
+      if (stored[i]) {
+        const img = document.createElement('img');
+        img.src = stored[i];
+        img.style.cursor = 'pointer';
+        img.onclick = () => {
+          previewEl.innerHTML = `<img id="mainCharacter" src="${stored[i]}" alt="캐릭터" />`;
+          bubbleTextEl.textContent = '날 데려와줘서 고마워~\n서랍에 들어가고싶어!';
+        };
+
+        const del = document.createElement('button');
+        del.textContent = '삭제';
+        del.className = 'delete-btn';
+        del.onclick = (e) => {
+          e.stopPropagation();
+          removeFromDrawer(i);
+        };
+
+        slot.appendChild(img);
+        slot.appendChild(del);
+      } else {
+        slot.textContent = '＋';
+      }
+
+      drawerEl.appendChild(slot);
+    }
+  }
+
+  function addToDrawer() {
+    let items = JSON.parse(localStorage.getItem('drawerItems'));
+    const image = document.getElementById('mainCharacter')?.src;
+
+    if (!image) return;
+
+    const emptyIndex = items.findIndex(item => !item);
+    if (emptyIndex === -1) {
+      alert('서랍이 가득 찼어요!');
+      return;
+    }
+
+    items[emptyIndex] = image;
+    localStorage.setItem('drawerItems', JSON.stringify(items));
+
+    previewEl.innerHTML = '';
+    bubbleTextEl.textContent = '감동이야~ 친하게 지내자 고마워!';
+
+    renderDrawer();
+  }
+
+  function removeFromDrawer(index) {
+    let items = JSON.parse(localStorage.getItem('drawerItems'));
+    items[index] = "";
+    localStorage.setItem('drawerItems', JSON.stringify(items));
+    renderDrawer();
+  }
+
+  // 초기 설정 및 로딩
+  window.onload = function () {
+    initializeStorage();
+    renderDrawer();
+
+    // '담아가기' 버튼에서 들어왔는지 확인
+    const fromSave = localStorage.getItem('fromSaveButton') === 'true';
+
+    if (fromSave) {
+      const characters = JSON.parse(localStorage.getItem('savedCharacters') || '[]');
+      const lastCharacter = characters[characters.length - 1];
+
+      if (lastCharacter) {
+        previewEl.innerHTML = `<img id="mainCharacter" src="${lastCharacter}" alt="캐릭터" />`;
+      }
+
+      // 플래그 제거
+      localStorage.removeItem('fromSaveButton');
+    }
+  };
+</script>
+
+</body>
+</html>
+
+
+
